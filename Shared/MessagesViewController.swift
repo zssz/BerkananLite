@@ -14,6 +14,9 @@ class MessagesViewController: UIHostingController<AnyView> {
     }
     
     override var inputAccessoryView: UIView? {
+        if let presentedViewController = self.presentedViewController, !presentedViewController.isBeingDismissed {
+            return nil
+        }
         return messageInputView
     }
     

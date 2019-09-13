@@ -2,33 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "BerkananCompression",
-        "repositoryURL": "https://github.com/zssz/BerkananCompression",
-        "state": {
-          "branch": null,
-          "revision": "d8d59dc3017595fb55ce254be2635f632a1ac80f",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "BerkananFoundation",
-        "repositoryURL": "https://github.com/zssz/BerkananFoundation",
-        "state": {
-          "branch": null,
-          "revision": "bb1a905349105006cd928cf92674abebf44549cc",
-          "version": "1.0.2"
-        }
-      },
-      {
-        "package": "BerkananSDK",
-        "repositoryURL": "https://github.com/zssz/BerkananSDK.git",
-        "state": {
-          "branch": null,
-          "revision": "d35fe46537172b56a1147261ca70121a244f02f5",
-          "version": "1.0.1"
-        }
-      },
-      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {

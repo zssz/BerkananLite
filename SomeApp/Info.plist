@@ -23,9 +23,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Allow access to the Berkanan Bluetooth Network. This allows you to group chat with nearby people (e.g., in emergencies 🚨, festivals 👩‍🎤, ✈️, 🛳, etc.), even while offline.</string>
+	<string>Allow access to the Berkanan Bluetooth Network — a public domain messaging service for crowds.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Allow access to the Berkanan Bluetooth Network. This allows you to group chat with nearby people (e.g., in emergencies 🚨, festivals 👩‍🎤, ✈️, 🛳, etc.), even while offline.</string>
+	<string>Allow access to the Berkanan Bluetooth Network — a public domain messaging service for crowds.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
