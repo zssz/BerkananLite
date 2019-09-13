@@ -27,7 +27,7 @@ extension AppDelegate {
     public func configureCurrentUserNotificationCenter() {
         let center = UNUserNotificationCenter.current()
         
-        // IMPORTANT: When exporting for localizations Xcode doesn't look for NSString.localizedUserNotificationString(forKey:, arguments:)). Make sure they are exported to by marking them with NSLocalizedString.
+        // IMPORTANT: When exporting for localizations Xcode doesn't look for NSString.localizedUserNotificationString(forKey:, arguments:)). Make sure they are exported also by marking them with NSLocalizedString.
         // _ = NSLocalizedString("Message", comment: "")
         // _ = NSLocalizedString("Send", comment: "")
         // _ = NSLocalizedString("Reply", comment: "")

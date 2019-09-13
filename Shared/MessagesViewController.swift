@@ -22,11 +22,11 @@ class MessagesViewController: UIHostingController<AnyView> {
     
     lazy private var messageInputView: MessageInputView? = {
         let view = self.nibBundle?.loadNibNamed("MessageInputView", owner: self, options: nil)?.first as? MessageInputView
-        view?.sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        view?.sendButton.addTarget(self, action: #selector(handleTapSendButton), for: .touchUpInside)
         return view
     }()
     
-    @objc func sendMessage() {
+    @objc func handleTapSendButton() {
         guard let payload = messageInputView?.textField.text else { return }
         guard let network = (UIApplication.shared.delegate as? AppDelegate)?.berkananNetwork else { return }
         let status = network.bluetoothAuthorization
@@ -40,7 +40,7 @@ class MessagesViewController: UIHostingController<AnyView> {
                 }))
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
             }
-            else if status == .restricted {
+            else {
                 alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
             }
             present(alertController, animated: true, completion: nil)
