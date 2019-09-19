@@ -33,11 +33,7 @@ public class MessageInputView: UIView {
             }
         }
     }
-    
-    public override var canBecomeFirstResponder: Bool {
-        return true
-    }
-    
+        
     override public var intrinsicContentSize: CGSize {
         return .zero
     }    
