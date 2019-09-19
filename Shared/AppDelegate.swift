@@ -13,27 +13,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     public var berkananNetwork = BerkananNetwork.shared
     
+    public var messageStore = MessageStore()
+    
     var publicBroadcastMessageSubjectCanceller: AnyCancellable?
     var numberOfNearbyUsersCanceller: AnyCancellable?
     
     var userData = UserData()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.        
-        BerkananNetwork.shared.start()
-        setupUserNotifications()
-        setupApplicationIconBadgeNumber()
-        return true
-    }
-    
-    private func setupUserNotifications() {
-        configureCurrentUserNotificationCenter()
-        requestUserNotificationAuthorization(provisional: true)
+        // Override point for customization after application launch.
+        if userData.firstRun {
+            userData.firstRun = false
+        }
+        else {
+            setupTerms()
+            BerkananNetwork.shared.start()
+        }
         publicBroadcastMessageSubjectCanceller = berkananNetwork.publicBroadcastMessageSubject
             .receive(on: RunLoop.main)
             .sink { message in
+                guard !self.userData.isBlocked(user: message.sourceUser) else { return }
+                self.messageStore.insert(message: message, at: 0)
+                
+                // Notify user if needed
                 UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
                     DispatchQueue.main.async {
+                        self.userData.notificationsAuthorizationStatus = settings.authorizationStatus
                         // Don't post notification if user can't see it
                         guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
                         // Only post notification if the app is in the background
@@ -44,6 +49,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                 })
         }
+        setupUserNotifications()
+        setupApplicationIconBadgeNumber()
+        setupCurrentUserNameAndIdentifier()        
+        return true
+    }
+    
+    private func setupTerms() {
+        userData.termsNotAccepted = !userData.termsAcceptButtonTapped
+    }
+    
+    private func setupCurrentUserNameAndIdentifier() {
+        User.current.name = userData.currentUserName
+        User.current.uuid = UUID(uuidString: userData.currentUserUUIDString)
+    }
+    
+    private func setupUserNotifications() {
+        configureCurrentUserNotificationCenter()
+        requestUserNotificationAuthorization(provisional: true)
     }
     
     /// Configures application icon badge number to show number of nearby users

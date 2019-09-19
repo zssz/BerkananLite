@@ -14,18 +14,8 @@ class MessageStore : ObservableObject {
     
     @Published var messages: [PublicBroadcastMessage] = []
     
-    private var publicBroadcastMessageSubjectCanceller: AnyCancellable?
-    
     init(messages: [PublicBroadcastMessage] = []) {
         self.messages = messages
-        if let network = (UIApplication.shared.delegate as? AppDelegate)?.berkananNetwork {
-            publicBroadcastMessageSubjectCanceller = network.publicBroadcastMessageSubject
-                .receive(on: RunLoop.main)
-                .sink { [weak self] message in
-                    guard let self = self else { return }
-                    self.insert(message: message, at: 0)
-            }
-        }
     }
     
     public func clear() {

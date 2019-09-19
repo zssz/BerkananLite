@@ -6,6 +6,7 @@
 import Foundation
 import SwiftUI
 import BerkananSDK
+import StoreKit
 
 class MessagesViewController: UIHostingController<AnyView> {
     

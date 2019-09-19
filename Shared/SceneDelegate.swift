@@ -20,7 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use a UIHostingController as window root view controller
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = MessagesViewController(rootView: AnyView(ContentView(messageStore: MessageStore()).environmentObject((UIApplication.shared.delegate as? AppDelegate)?.userData ?? UserData())))
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }            
+            window.rootViewController = MessagesViewController(rootView: AnyView(ContentView(messageStore: appDelegate.messageStore).environmentObject(appDelegate.userData)))
             self.window = window
             window.makeKeyAndVisible()
         }

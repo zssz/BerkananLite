@@ -6,13 +6,14 @@
 import Foundation
 import UserNotifications
 import BerkananSDK
+import UIKit
 
 extension AppDelegate {
     
     public func setupNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
             DispatchQueue.main.async {
-                self.userData.showAllowNotificationsButton = (settings.authorizationStatus == .provisional)
+                self.userData.notificationsAuthorizationStatus = settings.authorizationStatus
             }
         })
     }
@@ -20,8 +21,24 @@ extension AppDelegate {
     public func requestUserNotificationAuthorization(provisional: Bool = true) {
         let options: UNAuthorizationOptions = provisional ? [.alert, .sound, .badge, .provisional] : [.alert, .sound, .badge]
         UNUserNotificationCenter.current().requestAuthorization(options: options, completionHandler: { (granted, error) in
-            self.setupNotificationSettings()
+            self.setupNotificationSettings()            
+            if !provisional && !granted {
+                DispatchQueue.main.async {
+                    self.showNotificationsDenied()
+                }
+            }
         })
+    }
+    
+    public func showNotificationsDenied() {
+        let message = NSLocalizedString("Access to Notifications denied.", comment: "")
+        let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default, handler: { (action) in
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
+        (UIApplication.shared.connectedScenes.first { $0.delegate is UIWindowSceneDelegate }?.delegate as? UIWindowSceneDelegate)?.window??.topViewController?.present(alertController, animated: true, completion: nil)
     }
     
     public func configureCurrentUserNotificationCenter() {
@@ -31,11 +48,14 @@ extension AppDelegate {
         // _ = NSLocalizedString("Message", comment: "")
         // _ = NSLocalizedString("Send", comment: "")
         // _ = NSLocalizedString("Reply", comment: "")
+        // _ = NSLocalizedString("Block", comment: "")
         // _ = NSLocalizedString("%u more messages", comment: "")
         
         let replyAction = UNTextInputNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Reply.rawValue, title: NSString.localizedUserNotificationString(forKey: "Reply", arguments: nil), options: [], textInputButtonTitle: NSString.localizedUserNotificationString(forKey: "Send", arguments: nil), textInputPlaceholder: NSString.localizedUserNotificationString(forKey: "Message", arguments: nil))
         
-        let publicBroadcastMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue, actions: [replyAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
+        let blockAction = UNNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Block.rawValue, title: NSString.localizedUserNotificationString(forKey: "Block", arguments: nil), options: [])
+        
+        let publicBroadcastMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
         
         center.setNotificationCategories([publicBroadcastMessageCategory])
         center.delegate = self
@@ -83,6 +103,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     let message = PublicBroadcastMessage(text: response.userText)
                     berkananNetwork.publicBroadcastMessageSubject.send(message)
                     berkananNetwork.broadcast(message)
+                }
+                
+            default: ()
+            }
+            
+        case UNNotificationContent.ActionIdentifier.Block.rawValue:
+            switch category {
+                
+            case UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue:
+                if let uuid = UUID(uuidString: notification.request.identifier), let message = self.messageStore.messages.first(where: {$0.uuid == uuid}) {
+                    userData.block(user: message.sourceUser)
                 }
                 
             default: ()
