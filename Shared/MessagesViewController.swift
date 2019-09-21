@@ -21,7 +21,7 @@ class MessagesViewController: UIHostingController<AnyView> {
         return messageInputView
     }
     
-    lazy private var messageInputView: MessageInputView? = {
+    lazy public var messageInputView: MessageInputView? = {
         let view = self.nibBundle?.loadNibNamed("MessageInputView", owner: self, options: nil)?.first as? MessageInputView
         view?.sendButton.addTarget(self, action: #selector(handleTapSendButton), for: .touchUpInside)
         return view

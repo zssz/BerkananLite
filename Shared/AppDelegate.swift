@@ -76,6 +76,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .receive(on: RunLoop.main)
             .sink(receiveValue: { (value) in
                 UIApplication.shared.applicationIconBadgeNumber = value
+                UIApplication.shared.connectedScenes.forEach { (scene) in
+                    guard let window = (scene.delegate as? UIWindowSceneDelegate)?.window else { return }
+                    guard let messagesViewController = window?.rootViewController as? MessagesViewController else { return }
+                    messagesViewController.messageInputView?.textField.placeholder = String.localizedStringWithFormat(NSLocalizedString("Message for %u nearby users", comment: ""), value)
+                }
             })
     }
     
