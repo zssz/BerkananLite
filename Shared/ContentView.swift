@@ -28,7 +28,7 @@ struct ContentView : View {
                         }
                     }
                 }, label: { Image(systemName: "info.circle").font(.system(size: .init(integerLiteral: 17))).imageScale(.large).padding(5) }).alert(isPresented: $showsInfo) {
-                    Alert(title: Text("About"), message: Text("📢 Broadcast messages to the crowd around you. The range is about 70 meters, but your messages can reach further because they are retransmitted by receiving apps.\n\n🚨 We believe this network is essential, especially in emergencies. It's enabled by apps joining forces using Berkanan SDK.\n\n#berkanansdk #opensource #bluetooth #offline #network #public #broadcast #text #messaging #chat #crowds #nearby #background #privacy"), primaryButton: .cancel(), secondaryButton: .default(Text("Learn More"), action: {
+                    Alert(title: Text("About"), message: Text("📢 Broadcast messages to the crowd around you. The range is about 70 meters, but your messages can reach further because they are retransmitted by receiving apps.\n\n🚨 We believe this service is essential, especially in emergencies. It's enabled by apps joining forces using BerkananSDK.\n\n#berkanansdk #opensource #bluetooth #offline #network #public #broadcast #text #message #messaging #chat #crowd #nearby #background #privacy #noaccount #anonymous"), primaryButton: .cancel(), secondaryButton: .default(Text("Learn More"), action: {
                         guard let url = URL(string: "https://github.com/zssz/BerkananSDK") else { return }
                         UIApplication.shared.open(url, options: [:], completionHandler: nil)
                     }))
