@@ -44,16 +44,33 @@ struct ContentView : View {
     private var messagesView: some View {
         List {
             ForEach(messageStore.messages) { message in
+                // Don't show messages from blocked users
                 if !self.userData.isBlocked(user: message.sourceUser) {
-                    MessageRow(message: message).contextMenu {
-                        Button(action: { UIPasteboard.general.string = [message.sourceUser.name, message.text ?? ""].joined(separator: "\n") }) {
-                            Text("Copy")
-                            Image(systemName: "doc.on.doc")
-                        }
-                        if message.sourceUser != User.current {
-                            Button(action: { self.userData.block(user: message.sourceUser) }) {
-                                Text("Block")
-                                Image(systemName: "hand.raised")
+                    // Don't show flagged messages if user doesn't want to seem them
+                    if self.userData.showFlaggedMessagesEnabled ||
+                        (!self.userData.showFlaggedMessagesEnabled && !self.userData.isFlagged(message: message)) {
+                        MessageRow(message: message).contextMenu {
+                            Button(action: { UIPasteboard.general.string = [message.sourceUser.name, message.text ?? ""].joined(separator: "\n") }) {
+                                Text("Copy")
+                                Image(systemName: "doc.on.doc")
+                            }
+                            if message.sourceUser != User.current {
+                                if self.userData.isFlagged(message: message) {
+                                    Button(action: { self.userData.unflag(message: message) }) {
+                                        Text("Unflag")
+                                        Image(systemName: "flag.slash")
+                                    }
+                                }
+                                else {
+                                    Button(action: { self.userData.flag(message: message) }) {
+                                        Text("Flag")
+                                        Image(systemName: "flag")
+                                    }
+                                }
+                                Button(action: { self.userData.block(user: message.sourceUser) }) {
+                                    Text("Block")
+                                    Image(systemName: "hand.raised")
+                                }
                             }
                         }
                     }

@@ -51,6 +51,9 @@ final class UserData: ObservableObject  {
         }
     }
     
+    @Published(key: "showFlaggedMessagesEnabled")
+    var showFlaggedMessagesEnabled: Bool = true
+    
     @Published(key: "currentUserName")
     var currentUserName: String = UIDevice.current.name {
         didSet {
@@ -84,5 +87,25 @@ final class UserData: ObservableObject  {
     public func unblock(user: User) {
         guard let uuidString = user.uuid?.uuidString else { return }
         blockedUserUUIDs.removeAll(where: {$0 == uuidString})
+    }
+    
+    @Published(key: "flaggedMessageUUIDs")
+    var flaggedMessageUUIDs: [String] = []
+    
+    public func isFlagged(message: PublicBroadcastMessage) -> Bool {
+        guard let uuidString = message.uuid?.uuidString else { return false }
+        return flaggedMessageUUIDs.contains(uuidString)
+    }
+    
+    public func flag(message: PublicBroadcastMessage) {
+        guard let uuidString = message.uuid?.uuidString else { return }
+        if !flaggedMessageUUIDs.contains(uuidString) {
+            flaggedMessageUUIDs.append(uuidString)
+        }
+    }
+    
+    public func unflag(message: PublicBroadcastMessage) {
+        guard let uuidString = message.uuid?.uuidString else { return }
+        flaggedMessageUUIDs.removeAll(where: {$0 == uuidString})
     }
 }

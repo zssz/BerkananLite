@@ -38,11 +38,16 @@ struct SettingsView: View {
             
             Section {
                 NavigationLink(destination: BlockedUsersView().environmentObject(userData)) { Text("Blocked Users") }
+                Toggle(isOn: $userData.showFlaggedMessagesEnabled) { Text("Show Flagged Messages") }
             }
             
             Section(header: Text("About"), footer: Text("Version \(Bundle.main.formattedVersion)")) {
                 NavigationLink(destination: TermsView()) { Text("Terms of Use") }
                 NavigationLink(destination: PrivacyView()) { Text("Privacy Policy") }
+                Button(action: {
+                    guard let url = URL(string: "mailto:support@berkanan.chat?subject=Hello") else { return }
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }) { Text("Contact") }
                 Button(action: {
                     guard let url = URL(string: "https://github.com/zssz/BerkananLite") else { return }
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
