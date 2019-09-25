@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Message for %u nearby users</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@users@</string>
+		<key>users</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>Message for 1 nearby user</string>
+			<key>other</key>
+			<string>Message for %u nearby users</string>
+		</dict>
+	</dict>
+	<key>%u Messages</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@Messages@</string>
+		<key>Messages</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u Message</string>
+			<key>other</key>
+			<string>%u Messages</string>
+		</dict>
+	</dict>
+	<key>%u more messages</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@messages@</string>
+		<key>messages</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>u</string>
+			<key>one</key>
+			<string>%u more message</string>
+			<key>other</key>
+			<string>%u more messages</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -39,6 +39,8 @@
 		2D59166122BBCFD4007B169F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D59166022BBCFD4007B169F /* Assets.xcassets */; };
 		2D59166422BBCFD4007B169F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D59166322BBCFD4007B169F /* Preview Assets.xcassets */; };
 		2D59167222BBCFD4007B169F /* BerkananLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59167122BBCFD4007B169F /* BerkananLiteUITests.swift */; };
+		2D68A6EA233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
+		2D68A6EB233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
 		2DC184082333AF38003727F1 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A723327AA200E510E9 /* Bundle+Version.swift */; };
 		2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240D23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift */; };
 		2DC1840A2333AF4F003727F1 /* PublicBroadcastMessage+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240F2332309A007A4BDD /* PublicBroadcastMessage+Identifiable.swift */; };
@@ -95,6 +97,7 @@
 		2D616D8522BA0EAD00FBACB8 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageInputView.xib; sourceTree = "<group>"; };
 		2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		2D7F15982317CF1B009DBE68 /* BerkananSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BerkananSDK; path = ../../BerkananSDK; sourceTree = "<group>"; };
 		2DA8771F22B3B3D90000BB25 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		2DBFE18A22BA642900A56BB2 /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
@@ -238,6 +241,7 @@
 				2D0524F522AE77BD00518A7A /* LaunchScreen.storyboard */,
 				2DD91AD5233374DB009CFC03 /* TermsOfUse.txt */,
 				2DE3ABEF233393D500B0BBB6 /* PrivacyPolicy.txt */,
+				2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -360,6 +364,7 @@
 				2DE3ABF1233393D500B0BBB6 /* PrivacyPolicy.txt in Resources */,
 				2DD91AD7233374DB009CFC03 /* TermsOfUse.txt in Resources */,
 				2D445D0D22BBD57800E16322 /* Assets.xcassets in Resources */,
+				2D68A6EB233B4199006FA1DF /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +378,7 @@
 				2DE3ABF0233393D500B0BBB6 /* PrivacyPolicy.txt in Resources */,
 				2DD91AD6233374DB009CFC03 /* TermsOfUse.txt in Resources */,
 				2D59166122BBCFD4007B169F /* Assets.xcassets in Resources */,
+				2D68A6EA233B4199006FA1DF /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
