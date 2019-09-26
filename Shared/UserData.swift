@@ -57,7 +57,10 @@ final class UserData: ObservableObject  {
     @Published(key: "currentUserName")
     var currentUserName: String = UIDevice.current.name {
         didSet {
-            User.current.name = currentUserName
+          User.current.name = currentUserName
+          if currentUserName == "Anonymous" {
+            currentUserName = "Nameless"
+          }
         }
     }
     
