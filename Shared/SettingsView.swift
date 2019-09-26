@@ -18,7 +18,7 @@ struct SettingsView: View {
                 HStack {
                     Text("Name")
                     Divider()
-                    TextField("Anonymous", text: $userData.currentUserName)
+                    TextField("Nameless", text: $userData.currentUserName)
                 }
                 HStack {
                     Text("Identifier")
