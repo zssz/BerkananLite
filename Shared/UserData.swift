@@ -59,7 +59,7 @@ final class UserData: ObservableObject  {
         didSet {
           User.current.name = currentUserName
           if currentUserName == "Anonymous" {
-            currentUserName = "Nameless"
+            currentUserName = ""
           }
         }
     }
