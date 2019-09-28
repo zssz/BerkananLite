@@ -41,6 +41,8 @@
 		2D59167222BBCFD4007B169F /* BerkananLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59167122BBCFD4007B169F /* BerkananLiteUITests.swift */; };
 		2D68A6EA233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
 		2D68A6EB233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
+		2D996BE5233E0BE1003CAF5F /* UNNotificationContent+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+Additions.swift */; };
+		2D996BE6233E0BE1003CAF5F /* UNNotificationContent+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+Additions.swift */; };
 		2DC184082333AF38003727F1 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A723327AA200E510E9 /* Bundle+Version.swift */; };
 		2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240D23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift */; };
 		2DC1840A2333AF4F003727F1 /* PublicBroadcastMessage+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240F2332309A007A4BDD /* PublicBroadcastMessage+Identifiable.swift */; };
@@ -99,6 +101,7 @@
 		2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		2D7F15982317CF1B009DBE68 /* BerkananSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BerkananSDK; path = ../../BerkananSDK; sourceTree = "<group>"; };
+		2D996BE4233E0BE1003CAF5F /* UNNotificationContent+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+Additions.swift"; sourceTree = "<group>"; };
 		2DA8771F22B3B3D90000BB25 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		2DBFE18A22BA642900A56BB2 /* AppDelegate+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+UserNotifications.swift"; sourceTree = "<group>"; };
 		2DC3D520232944AF00A6D388 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
@@ -223,6 +226,7 @@
 				2D0524EA22AE77B300518A7A /* AppDelegate.swift */,
 				2D1542A723327AA200E510E9 /* Bundle+Version.swift */,
 				2DBFE18A22BA642900A56BB2 /* AppDelegate+UserNotifications.swift */,
+				2D996BE4233E0BE1003CAF5F /* UNNotificationContent+Additions.swift */,
 				2D0524EC22AE77B300518A7A /* SceneDelegate.swift */,
 				2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */,
 				2D0524EE22AE77B300518A7A /* ContentView.swift */,
@@ -430,6 +434,7 @@
 				2DD91AD123335CF1009CFC03 /* BlockedUsersView.swift in Sources */,
 				2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */,
 				2D445D1F22BBD62700E16322 /* MessagesViewController.swift in Sources */,
+				2D996BE6233E0BE1003CAF5F /* UNNotificationContent+Additions.swift in Sources */,
 				2D445D2022BBD62700E16322 /* MessageInputView.swift in Sources */,
 				2D445D2222BBD62700E16322 /* MessageStore.swift in Sources */,
 				2D445D2322BBD62700E16322 /* MessageRow.swift in Sources */,
@@ -454,6 +459,7 @@
 				2D1542AA2332986F00E510E9 /* UIWindow+TopViewController.swift in Sources */,
 				2DE3ABED233392FF00B0BBB6 /* PrivacyView.swift in Sources */,
 				2D1024122332556C007A4BDD /* SettingsView.swift in Sources */,
+				2D996BE5233E0BE1003CAF5F /* UNNotificationContent+Additions.swift in Sources */,
 				2D1542A823327AA200E510E9 /* Bundle+Version.swift in Sources */,
 				2D445CF922BBD08500E16322 /* MessageStore.swift in Sources */,
 				2D445CFA22BBD08500E16322 /* MessageRow.swift in Sources */,
