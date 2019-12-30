@@ -19,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>17</string>
+	<string>18</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Allow access to the Berkanan Bluetooth Network — a public domain messaging service for crowds.</string>
+	<string>Allow access to the Berkanan Bluetooth Service to be able to communicate even while offline.</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Allow access to the Berkanan Bluetooth Network — a public domain messaging service for crowds.</string>
+	<string>Allow access to the Berkanan Bluetooth Service to be able to communicate even while offline.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

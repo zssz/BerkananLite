@@ -41,6 +41,8 @@
 		2D59167222BBCFD4007B169F /* BerkananLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59167122BBCFD4007B169F /* BerkananLiteUITests.swift */; };
 		2D68A6EA233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
 		2D68A6EB233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
+		2D78C74423B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */; };
+		2D78C74523B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */; };
 		2D996BE5233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */; };
 		2D996BE6233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */; };
 		2D9F53EA237589DD003B0F9E /* UNUserNotificationCenter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F53E7237589DC003B0F9E /* UNUserNotificationCenter+Additions.swift */; };
@@ -106,6 +108,7 @@
 		2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageInputView.xib; sourceTree = "<group>"; };
 		2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
 		2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
+		2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKStoreReviewController+Utility.swift"; sourceTree = "<group>"; };
 		2D7F15982317CF1B009DBE68 /* BerkananSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BerkananSDK; path = ../../BerkananSDK; sourceTree = "<group>"; };
 		2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+ActionAdditions.swift"; sourceTree = "<group>"; };
 		2D9F53E7237589DC003B0F9E /* UNUserNotificationCenter+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Additions.swift"; sourceTree = "<group>"; };
@@ -289,6 +292,7 @@
 				2D1542A723327AA200E510E9 /* Bundle+Version.swift */,
 				2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */,
 				2D10240D23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift */,
+				2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -493,6 +497,7 @@
 				2DC184082333AF38003727F1 /* Bundle+Version.swift in Sources */,
 				2DC1840A2333AF4F003727F1 /* PublicMessage+Identifiable.swift in Sources */,
 				2D1024132332556C007A4BDD /* SettingsView.swift in Sources */,
+				2D78C74523B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */,
 				2DD91AD123335CF1009CFC03 /* BlockedUsersView.swift in Sources */,
 				2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */,
 				2D445D1F22BBD62700E16322 /* MessagesViewController.swift in Sources */,
@@ -521,6 +526,7 @@
 				2D10240E23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift in Sources */,
 				2D445CF722BBD08500E16322 /* MessageInputView.swift in Sources */,
 				2D1542AA2332986F00E510E9 /* UIWindow+TopViewController.swift in Sources */,
+				2D78C74423B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */,
 				2DE3ABED233392FF00B0BBB6 /* PrivacyView.swift in Sources */,
 				2D1024122332556C007A4BDD /* SettingsView.swift in Sources */,
 				2D996BE5233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */,

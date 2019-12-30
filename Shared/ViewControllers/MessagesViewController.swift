@@ -12,6 +12,8 @@ import StoreKit
 
 class MessagesViewController: UIHostingController<AnyView> {
   
+  private static var numberOfSentMessages = 0
+  
   override var canBecomeFirstResponder: Bool {
     return true
   }
@@ -55,6 +57,16 @@ class MessagesViewController: UIHostingController<AnyView> {
     let message = Message(payloadType: .publicMessage, payload: payload)
     service.receiveMessageSubject.send(message)
     try? service.send(message)
+    MessagesViewController.numberOfSentMessages += 1
+    if MessagesViewController.numberOfSentMessages == 4 {
+      // User is delighted. We will ask for review now.
+      SKStoreReviewController.requestReviewForCurrentVersionIfNeeded()
+      // Bug workaround for disappearing keyboard after presenting review request alert
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        self.becomeFirstResponder()
+        self.reloadInputViews()
+      }
+    }
     messageInputView?.textField.resignFirstResponder()
   }
 }
