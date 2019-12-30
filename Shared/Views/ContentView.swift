@@ -46,7 +46,7 @@ struct ContentView : View {
           if self.userData.showFlaggedMessagesEnabled ||
             (!self.userData.showFlaggedMessagesEnabled && !self.userData.isFlagged(message: message)) {
             MessageRow(message: message).contextMenu {
-              Button(action: { UIPasteboard.general.string = [message.sourceUser.name, message.text ?? ""].joined(separator: "\n") }) {
+              Button(action: { UIPasteboard.general.string = [message.sourceUser.name, message.text].joined(separator: "\n") }) {
                 Text("Copy")
                 Image(systemName: "doc.on.doc")
               }
@@ -109,7 +109,7 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
   static var previews: some View {
-    ContentView(messageStore: MessageStore(messages: [PublicBroadcastMessage(text: "Hello!")]) )
+    ContentView(messageStore: MessageStore(messages: [PublicMessage(text: "Hello!")]) )
   }
 }
 #endif

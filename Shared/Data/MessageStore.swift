@@ -12,11 +12,11 @@ import BerkananSDK
 
 class MessageStore : ObservableObject {
   
-  private static let maxNumbferOfMessages: Int = 1024
+  private static let maxNumberOfMessages: Int = 1024
   
-  @Published var messages: [PublicBroadcastMessage] = []
+  @Published var messages: [PublicMessage] = []
   
-  init(messages: [PublicBroadcastMessage] = []) {
+  init(messages: [PublicMessage] = []) {
     self.messages = messages
   }
   
@@ -24,8 +24,8 @@ class MessageStore : ObservableObject {
     self.messages = []
   }
   
-  public func insert(message: PublicBroadcastMessage, at index: Int) {
-    if self.messages.count >= MessageStore.maxNumbferOfMessages {
+  public func insert(message: PublicMessage, at index: Int) {
+    if self.messages.count >= MessageStore.maxNumberOfMessages {
       self.messages.remove(at: self.messages.count-1)
     }
     self.messages.insert(message, at: index)

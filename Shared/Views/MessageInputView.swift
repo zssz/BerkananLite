@@ -27,7 +27,11 @@ public class MessageInputView: UIView {
     textField.topAnchor.constraint(equalTo: topAnchor, constant: 5.0).isActive = true
     textDidChangeNotificationCanceller = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: textField).sink { [weak self] notification in
       guard let self = self else { return }
-      self.textField.textColor = PublicBroadcastMessage.isPDUTooBig(for: self.textField.text ?? "") ? .systemRed : .label
+      let publicMessage = PublicMessage(text: self.textField.text ?? "")
+      let payload = (try? publicMessage.serializedData()) ?? Data()
+      let message = Message(payloadType: .publicMessage, payload: payload)
+      let isPDUTooBig = message.isPDUTooBig()
+      self.textField.textColor = isPDUTooBig ? .systemRed : .label
       self.sendButton.isHidden = self.textField.text?.isEmpty ?? true
       self.setNeedsLayout()
       UIView.animate(withDuration: 0.2) {

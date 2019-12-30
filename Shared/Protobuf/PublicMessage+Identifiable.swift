@@ -8,9 +8,9 @@
 import Foundation
 import BerkananSDK
 
-extension PublicBroadcastMessage: Identifiable {
+extension PublicMessage: Identifiable {
   
   public var id: UUID? {
-    return uuid
+    return identifier.foundationValue()
   }    
 }

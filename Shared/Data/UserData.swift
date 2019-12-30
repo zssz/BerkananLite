@@ -20,8 +20,8 @@ final class UserData: ObservableObject  {
   var termsNotAccepted: Bool = true {
     didSet {
       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-      if !appDelegate.berkananNetwork.isStarted {
-        appDelegate.berkananNetwork.start()
+      if !appDelegate.berkananBluetoothService.isStarted {
+        appDelegate.berkananBluetoothService.start()
       }
     }
   }
@@ -70,7 +70,7 @@ final class UserData: ObservableObject  {
   var currentUserUUIDString: String = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString {
     didSet {
       guard let uuid = UUID(uuidString: currentUserUUIDString) else { return }
-      User.current.uuid = uuid
+      User.current.identifier = uuid.protobufValue()
     }
   }
   
@@ -78,39 +78,39 @@ final class UserData: ObservableObject  {
   var blockedUserUUIDs: [String] = []
   
   public func isBlocked(user: User) -> Bool {
-    guard let uuidString = user.uuid?.uuidString else { return false }
+    guard let uuidString = user.identifier.foundationValue()?.uuidString else { return false }
     return blockedUserUUIDs.contains(uuidString)
   }
   
   public func block(user: User) {
-    guard let uuidString = user.uuid?.uuidString else { return }
+    guard let uuidString = user.identifier.foundationValue()?.uuidString else { return }
     if !blockedUserUUIDs.contains(uuidString) {
       blockedUserUUIDs.append(uuidString)
     }
   }
   
   public func unblock(user: User) {
-    guard let uuidString = user.uuid?.uuidString else { return }
+    guard let uuidString = user.identifier.foundationValue()?.uuidString else { return }
     blockedUserUUIDs.removeAll(where: {$0 == uuidString})
   }
   
   @Published(key: "flaggedMessageUUIDs")
   var flaggedMessageUUIDs: [String] = []
   
-  public func isFlagged(message: PublicBroadcastMessage) -> Bool {
-    guard let uuidString = message.uuid?.uuidString else { return false }
+  public func isFlagged(message: PublicMessage) -> Bool {
+    guard let uuidString = message.identifier.foundationValue()?.uuidString else { return false }
     return flaggedMessageUUIDs.contains(uuidString)
   }
   
-  public func flag(message: PublicBroadcastMessage) {
-    guard let uuidString = message.uuid?.uuidString else { return }
+  public func flag(message: PublicMessage) {
+    guard let uuidString = message.identifier.foundationValue()?.uuidString else { return }
     if !flaggedMessageUUIDs.contains(uuidString) {
       flaggedMessageUUIDs.append(uuidString)
     }
   }
   
-  public func unflag(message: PublicBroadcastMessage) {
-    guard let uuidString = message.uuid?.uuidString else { return }
+  public func unflag(message: PublicMessage) {
+    guard let uuidString = message.identifier.foundationValue()?.uuidString else { return }
     flaggedMessageUUIDs.removeAll(where: {$0 == uuidString})
   }
 }

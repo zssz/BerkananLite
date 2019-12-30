@@ -30,9 +30,10 @@ class MessagesViewController: UIHostingController<AnyView> {
   }()
   
   @objc func handleTapSendButton() {
-    guard let payload = messageInputView?.textField.text else { return }
-    guard let network = (UIApplication.shared.delegate as? AppDelegate)?.berkananNetwork else { return }
-    let status = network.bluetoothAuthorization
+    guard let text = messageInputView?.textField.text else { return }
+    guard let service = (UIApplication.shared.delegate as? AppDelegate)?.berkananBluetoothService else { return }
+    
+    let status = service.bluetoothAuthorization
     guard status == .allowedAlways else {
       let message = (status == .denied) ? NSLocalizedString("Access to Bluetooth denied.", comment: "") : NSLocalizedString("Access to Bluetooth restricted.", comment: "")
       let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: .alert)
@@ -49,9 +50,11 @@ class MessagesViewController: UIHostingController<AnyView> {
       present(alertController, animated: true, completion: nil)
       return
     }
-    let message = PublicBroadcastMessage(text: payload)
-    network.publicBroadcastMessageSubject.send(message)
-    network.broadcast(message)        
+    let publicMessage = PublicMessage(text: text)
+    guard let payload = try? publicMessage.serializedData() else { return }
+    let message = Message(payloadType: .publicMessage, payload: payload)
+    service.receiveMessageSubject.send(message)
+    try? service.send(message)
     messageInputView?.textField.resignFirstResponder()
   }
 }

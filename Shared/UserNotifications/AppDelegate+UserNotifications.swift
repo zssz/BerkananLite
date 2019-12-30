@@ -57,9 +57,9 @@ extension AppDelegate {
     
     let blockAction = UNNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Block.rawValue, title: NSString.localizedUserNotificationString(forKey: "Block", arguments: nil), options: [])
     
-    let publicBroadcastMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
+    let publicMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
     
-    center.setNotificationCategories([publicBroadcastMessageCategory])
+    center.setNotificationCategories([publicMessageCategory])
     center.delegate = self
   }
 }
@@ -79,9 +79,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       case UNNotificationDefaultActionIdentifier:
         switch category {
           
-          case UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue:
+          case UNNotificationContent.CategoryType.PublicMessage.rawValue:
             if let uuid = UUID(uuidString: notification.request.identifier) {
-              self.showPublicBroadcastMessage(with: uuid)
+              self.showPublicMessage(with: uuid)
           }
           
           default: ()
@@ -91,7 +91,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       case UNNotificationDismissActionIdentifier:
         switch category {
           
-          case UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue:
+          case UNNotificationContent.CategoryType.PublicMessage.rawValue:
             UNUserNotificationCenter.current().removeDeliveredNotifications(forCategoryIdentifier: category)
           
           default: ()
@@ -100,11 +100,16 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       case UNNotificationContent.ActionIdentifier.Reply.rawValue:
         switch category {
           
-          case UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue:
+          case UNNotificationContent.CategoryType.PublicMessage.rawValue:
             if let response = response as? UNTextInputNotificationResponse {
-              let message = PublicBroadcastMessage(text: response.userText)
-              berkananNetwork.publicBroadcastMessageSubject.send(message)
-              berkananNetwork.broadcast(message)
+              let publicMessage = PublicMessage(text: response.userText)
+              do {
+                let payload = try publicMessage.serializedData()
+                let message = Message(payloadType: .publicMessage, payload: payload)
+                try berkananBluetoothService.send(message)
+                berkananBluetoothService.receiveMessageSubject.send(message)
+              }
+              catch {}
           }
           
           default: ()
@@ -113,8 +118,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
       case UNNotificationContent.ActionIdentifier.Block.rawValue:
         switch category {
           
-          case UNNotificationContent.CategoryType.PublicBroadcastMessage.rawValue:
-            if let uuid = UUID(uuidString: notification.request.identifier), let message = self.messageStore.messages.first(where: {$0.uuid == uuid}) {
+          case UNNotificationContent.CategoryType.PublicMessage.rawValue:
+            if let uuid = UUID(uuidString: notification.request.identifier), let message = self.messageStore.messages.first(where: {$0.identifier.foundationValue() == uuid}) {
               userData.block(user: message.sourceUser)
           }
           
@@ -130,7 +135,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate {
   
-  public func showPublicBroadcastMessage(with uuid: UUID) {
+  public func showPublicMessage(with uuid: UUID) {
     // TODO: Implement this feature in your app
   }
 }
