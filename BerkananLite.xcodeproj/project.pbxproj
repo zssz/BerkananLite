@@ -66,6 +66,7 @@
 		2D9F53ED23758AC8003B0F9E /* UNNotificationContent+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F53E9237589DC003B0F9E /* UNNotificationContent+Additions.swift */; };
 		2D9F53EE23758ACB003B0F9E /* UNNotificationRequest+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F53E8237589DC003B0F9E /* UNNotificationRequest+Additions.swift */; };
 		2D9F53EF23758ACD003B0F9E /* UNUserNotificationCenter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F53E7237589DC003B0F9E /* UNUserNotificationCenter+Additions.swift */; };
+		2DB2C93723C360D4006D4FD3 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 2DB2C93623C360D4006D4FD3 /* Introspect */; };
 		2DC184082333AF38003727F1 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A723327AA200E510E9 /* Bundle+Version.swift */; };
 		2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240D23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift */; };
 		2DC1840A2333AF4F003727F1 /* PublicMessage+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D10240F2332309A007A4BDD /* PublicMessage+Identifiable.swift */; };
@@ -171,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DD6005422BCB7AC008030A3 /* BerkananSDK in Frameworks */,
+				2DB2C93723C360D4006D4FD3 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +410,7 @@
 			name = SomeApp;
 			packageProductDependencies = (
 				2DD6005322BCB7AC008030A3 /* BerkananSDK */,
+				2DB2C93623C360D4006D4FD3 /* Introspect */,
 			);
 			productName = SomeApp;
 			productReference = 2D445D0422BBD57400E16322 /* SomeApp.app */;
@@ -1058,6 +1061,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		2D8074D223C1B87000D9439A /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D8074D123C1B87000D9439A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		2DB2C93623C360D4006D4FD3 /* Introspect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2D8074D123C1B87000D9439A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
