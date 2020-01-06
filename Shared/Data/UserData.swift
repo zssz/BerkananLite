@@ -16,6 +16,34 @@ final class UserData: ObservableObject  {
   @Published(key: "firstRun")
   var firstRun: Bool = true
   
+  static let minimumBodyFontSize: CGFloat = 17
+  
+  @Published(key: "bodyFontSize")
+  var bodyFontSize: CGFloat = minimumBodyFontSize {
+    didSet {
+      captionFontSize = floor(bodyFontSize * 12 / 17)
+      footnoteFontSize = floor(bodyFontSize * 13 / 17)
+    }
+  }
+  
+  @Published(key: "captionFontSize")
+  var captionFontSize: CGFloat = 12
+  
+  @Published(key: "footnoteFontSize")
+  var footnoteFontSize: CGFloat = 13
+  
+  @Published
+  var numberOfNearbyUsers: Int = 0
+  
+  // TODO: remove this when `Text` will get clickable links
+  var maxWidth: CGFloat = 0
+  
+  @Published
+  var showsPreferences = false
+  
+  @Published(key: "composedText")
+  var composedText = ""
+  
   @Published(key: "termsNotAccepted")
   var termsNotAccepted: Bool = true {
     didSet {

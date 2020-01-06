@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D59165722BBCFD0007B169F"
-               BuildableName = "BerkananLite.app"
+               BuildableName = "Berkanan Lite.app"
                BlueprintName = "BerkananLite"
                ReferencedContainer = "container:BerkananLite.xcodeproj">
             </BuildableReference>
@@ -38,6 +38,16 @@
                ReferencedContainer = "container:BerkananLite.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2D40B2DF23C24D2900359B34"
+               BuildableName = "BerkananLiteUIScreenshots.xctest"
+               BlueprintName = "BerkananLiteUIScreenshots"
+               ReferencedContainer = "container:BerkananLite.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -55,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D59165722BBCFD0007B169F"
-            BuildableName = "BerkananLite.app"
+            BuildableName = "Berkanan Lite.app"
             BlueprintName = "BerkananLite"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
@@ -72,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D59165722BBCFD0007B169F"
-            BuildableName = "BerkananLite.app"
+            BuildableName = "Berkanan Lite.app"
             BlueprintName = "BerkananLite"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>

@@ -22,9 +22,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Use a UIHostingController as window root view controller
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
+      self.window = window
       guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }            
       window.rootViewController = MessagesViewController(rootView: AnyView(ContentView(messageStore: appDelegate.messageStore).environmentObject(appDelegate.userData)))
-      self.window = window
+      windowScene.sizeRestrictions?.minimumSize = CGSize(width: 384, height: 384)
+      #if targetEnvironment(macCatalyst)
+      if let titlebar = windowScene.titlebar {
+        titlebar.titleVisibility = .hidden
+        titlebar.toolbar = nil
+      }
+      #endif
       window.makeKeyAndVisible()
     }
   }

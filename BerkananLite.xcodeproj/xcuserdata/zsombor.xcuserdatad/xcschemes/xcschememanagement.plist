@@ -14,6 +14,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>BerkananLiteUIScreenshots.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Proba.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,11 +27,16 @@
 		<key>SomeApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>2D40B2DF23C24D2900359B34</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2D59165722BBCFD0007B169F</key>
 		<dict>
 			<key>primary</key>

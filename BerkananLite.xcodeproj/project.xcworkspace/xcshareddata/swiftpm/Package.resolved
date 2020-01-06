@@ -2,39 +2,21 @@
   "object": {
     "pins": [
       {
-        "package": "BerkananCompression",
-        "repositoryURL": "https://github.com/zssz/BerkananCompression",
-        "state": {
-          "branch": null,
-          "revision": "b6f38a9d421c0958efe09e832ef74e2a6f5852e5",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "BerkananFoundation",
-        "repositoryURL": "https://github.com/zssz/BerkananFoundation",
-        "state": {
-          "branch": null,
-          "revision": "fdc3d368825be15810195113b4275970bdda6b3a",
-          "version": "1.0.0"
-        }
-      },
-      {
-        "package": "BerkananSDK",
-        "repositoryURL": "https://github.com/zssz/BerkananSDK.git",
-        "state": {
-          "branch": null,
-          "revision": "3e7d2fe7d271b2794d0025b2629264e23ae95c64",
-          "version": "1.0.0"
-        }
-      },
-      {
         "package": "SwiftProtobuf",
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
           "revision": "da75a93ac017534e0028e83c0e4fc4610d2acf48",
           "version": "1.7.0"
+        }
+      },
+      {
+        "package": "Introspect",
+        "repositoryURL": "https://github.com/timbersoftware/SwiftUI-Introspect.git",
+        "state": {
+          "branch": null,
+          "revision": "732316ac5957675eac2ed8ef9c0a5b95a353f9ff",
+          "version": "0.0.6"
         }
       }
     ]

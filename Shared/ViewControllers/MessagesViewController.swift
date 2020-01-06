@@ -9,15 +9,40 @@ import Foundation
 import SwiftUI
 import BerkananSDK
 import StoreKit
+import Combine
 
 class MessagesViewController: UIHostingController<AnyView> {
-  
+    
+  // Used to prompt user for review
   private static var numberOfSentMessages = 0
+  
+  override var keyCommands: [UIKeyCommand]? {
+    return [
+      UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(hidePreferences))
+    ]
+  }
+  
+  @objc func hidePreferences() {
+    AppDelegate.shared?.userData.showsPreferences = false
+  }
+  
+  // TODO: remove this when `Text` will get clickable links
+  override func viewDidLayoutSubviews() {
+    super.viewDidLayoutSubviews()
+    let availableWidth = view.bounds.size.width - view.layoutMargins.left - view.layoutMargins.right + 2
+    AppDelegate.shared?.userData.maxWidth = availableWidth
+  }
+  
+  #if !targetEnvironment(macCatalyst)
+  
+  private var textDidChangeNotificationCanceller: AnyCancellable?
+  
+  private var userDataChangeCanceller: AnyCancellable?
   
   override var canBecomeFirstResponder: Bool {
     return true
   }
-  
+
   override var inputAccessoryView: UIView? {
     if let presentedViewController = self.presentedViewController, !presentedViewController.isBeingDismissed {
       return nil
@@ -28,45 +53,47 @@ class MessagesViewController: UIHostingController<AnyView> {
   lazy public var messageInputView: MessageInputView? = {
     let view = self.nibBundle?.loadNibNamed("MessageInputView", owner: self, options: nil)?.first as? MessageInputView
     view?.sendButton.addTarget(self, action: #selector(handleTapSendButton), for: .touchUpInside)
+    view?.textField.clearsOnBeginEditing = false
+    view?.textField.text = AppDelegate.shared?.userData.composedText
+    textDidChangeNotificationCanceller = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: view?.textField).sink { [weak self] notification in
+      guard let self = self else { return }
+      AppDelegate.shared?.userData.composedText = self.messageInputView?.textField.text ?? ""
+      self.configureMessageInputView()
+    }
+    // Use async to not get into recursive trap when initializing
+    DispatchQueue.main.async {
+      self.configureMessageInputView()
+    }
+    userDataChangeCanceller = AppDelegate.shared?.userData.objectWillChange.sink(receiveValue: { [weak self] (value) in
+      // Use async so object has the change already
+      DispatchQueue.main.async {
+        guard let self = self else { return }
+        if self.messageInputView?.textField.text != AppDelegate.shared?.userData.composedText {
+          self.messageInputView?.textField.text = AppDelegate.shared?.userData.composedText
+          self.configureMessageInputView()
+        }
+      }
+    })
     return view
   }()
   
-  @objc func handleTapSendButton() {
-    guard let text = messageInputView?.textField.text else { return }
-    guard let service = (UIApplication.shared.delegate as? AppDelegate)?.berkananBluetoothService else { return }
+  private func configureMessageInputView() {
+    guard let appDelegate = AppDelegate.shared else { return }
+    let text = AppDelegate.shared?.userData.composedText ?? ""
+    let isPDUTooBig = appDelegate.isMessageTooBig(for: text)
+    messageInputView?.textField.textColor = isPDUTooBig ? .systemRed : .label
+    messageInputView?.sendButton.isHidden = text.isEmpty
+    messageInputView?.setNeedsLayout()
+    UIView.animate(withDuration: 0.2) {
+      self.messageInputView?.layoutIfNeeded()
+    }
+  }
     
-    let status = service.bluetoothAuthorization
-    guard status == .allowedAlways else {
-      let message = (status == .denied) ? NSLocalizedString("Access to Bluetooth denied.", comment: "") : NSLocalizedString("Access to Bluetooth restricted.", comment: "")
-      let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: .alert)
-      if status == .denied {
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default, handler: { (action) in
-          guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-          self.view.window?.windowScene?.open(url, options: nil, completionHandler: nil)
-        }))
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-      }
-      else {
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: .cancel, handler: nil))
-      }
-      present(alertController, animated: true, completion: nil)
-      return
-    }
-    let publicMessage = PublicMessage(text: text)
-    guard let payload = try? publicMessage.serializedData() else { return }
-    let message = Message(payloadType: .publicMessage, payload: payload)
-    service.receiveMessageSubject.send(message)
-    try? service.send(message)
-    MessagesViewController.numberOfSentMessages += 1
-    if MessagesViewController.numberOfSentMessages == 4 {
-      // User is delighted. We will ask for review now.
-      SKStoreReviewController.requestReviewForCurrentVersionIfNeeded()
-      // Bug workaround for disappearing keyboard after presenting review request alert
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        self.becomeFirstResponder()
-        self.reloadInputViews()
-      }
-    }
+  @objc func handleTapSendButton() {
+    guard let text = AppDelegate.shared?.userData.composedText else { return }
+    AppDelegate.shared?.send(text)
     messageInputView?.textField.resignFirstResponder()
   }
+  
+  #endif
 }

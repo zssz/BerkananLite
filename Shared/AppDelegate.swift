@@ -13,15 +13,20 @@ import UserNotifications
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
+  public static var shared: AppDelegate? {
+      (UIApplication.shared.delegate as? AppDelegate)
+  }
+  
   static let berkananLiteServiceConfigurationIdentifier = UUID(uuidString: "A59240D8-26DF-47C5-A3A7-CC2B5DEB8919")!
   
   public var berkananBluetoothService = try! BerkananBluetoothService(configuration: Configuration(identifier: berkananLiteServiceConfigurationIdentifier))
+  
+  var numberOfSentMessages = 0
   
   public var messageStore = MessageStore()
   
   var receiveMessageCanceller: AnyCancellable?
   var numberOfNearbyUsersCanceller: AnyCancellable?
-  var nearbyServicesObservation: NSKeyValueObservation?
   
   var userData = UserData()
   
@@ -87,7 +92,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             // Notify user if needed
             // Only post notification if the app is in the background
+            #if !targetEnvironment(macCatalyst)
             guard UIApplication.shared.applicationState == .background else { return }
+            #endif
             // Don't post notification for messages sent by current user
             guard publicMessage.sourceUser != User.current else { return }
             UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
@@ -95,6 +102,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.userData.notificationsAuthorizationStatus = settings.authorizationStatus
                 // Don't post notification if user can't see it
                 guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+                // Don't post if not enabled
+                if settings.authorizationStatus == .authorized && !self.userData.notificationsEnabled {
+                  return
+                }
                 UNUserNotificationCenter.current().add(UNNotificationRequest(publicMessage: publicMessage), withCompletionHandler: nil)
               }
             })
@@ -106,6 +117,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     setupUserNotifications()
     setupApplicationIconBadgeNumber()
     setupCurrentUserNameAndIdentifier()
+    
+    if isScreenshoting {
+      prepareForScreenshots()
+    }
+
     return true
   }
   
@@ -113,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     userData.termsNotAccepted = !userData.termsAcceptButtonTapped
   }
   
-  private func setupCurrentUserNameAndIdentifier() {
+  func setupCurrentUserNameAndIdentifier() {
     User.current.name = userData.currentUserName
     User.current.identifier = UUID(uuidString: userData.currentUserUUIDString)?.protobufValue() ?? PBUUID.random()
   }
@@ -130,12 +146,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     .receive(on: RunLoop.main)
     .sink(receiveValue: { (value) in
       let number = value.count
-      UIApplication.shared.applicationIconBadgeNumber = number
-      UIApplication.shared.connectedScenes.forEach { (scene) in
-        guard let window = (scene.delegate as? UIWindowSceneDelegate)?.window else { return }
-        guard let messagesViewController = window?.rootViewController as? MessagesViewController else { return }
-        messagesViewController.messageInputView?.textField.placeholder = String.localizedStringWithFormat(NSLocalizedString("Message for %u nearby users", comment: ""), number)
+      if !self.isScreenshoting {
+        self.userData.numberOfNearbyUsers = number
       }
+      UIApplication.shared.applicationIconBadgeNumber = number
     })
   }
   
@@ -155,5 +169,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the user discards a scene session.
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  }
+  
+  // MARK: - Menus
+    
+  var menuController: MenuController!
+  
+  override func buildMenu(with builder: UIMenuBuilder) {
+    if builder.system == .main {
+      menuController = MenuController(with: builder)
+    }
+  }
+  
+  override func validate(_ command: UICommand) {
+    if command.action == #selector(makeTextSmaller) {
+      command.attributes = (self.userData.bodyFontSize > UserData.minimumBodyFontSize) ? [] : .disabled
+    }
+    else if command.action == #selector(showPreferences) {
+      command.attributes = (self.userData.showsPreferences) ? .disabled : []
+    }
+  }
+  
+  @objc public func makeTextBigger() {
+    self.userData.bodyFontSize += 2
+  }
+  
+  @objc public func makeTextSmaller() {
+    self.userData.bodyFontSize -= 2
+  }
+  
+  @objc public func showPreferences() {
+    self.userData.showsPreferences = true
   }
 }

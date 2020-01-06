@@ -7,6 +7,7 @@
 
 import SwiftUI
 import BerkananSDK
+import Introspect
 
 struct ContentView : View {
   
@@ -14,66 +15,72 @@ struct ContentView : View {
   
   @ObservedObject var messageStore: MessageStore
   
-  @State var showsInfo = false
-  
-  @State var showsSettings = false
-  
   var body: some View {
-    NavigationView {
-      self.messagesView.navigationBarTitle(Text("Public")).navigationBarItems(
-        leading: Button(action: {
-          self.showsInfo = true
-        }, label: { Image(systemName: "info.circle").font(.system(size: .init(integerLiteral: 17))).imageScale(.large).padding(5) }).alert(isPresented: $showsInfo) {
-          Alert(title: Text("About"), message: Text("📢 Broadcast messages to the crowd around you. The range is about 70 meters, but your messages can reach further because they are retransmitted by receiving apps.\n\n🚨 We believe this service is essential, especially in emergencies. It's enabled by apps joining forces using BerkananSDK.\n\n#berkanansdk #opensource #bluetooth #offline #network #public #broadcast #text #message #messaging #chat #crowd #nearby #background #privacy #noaccount #anonymous"), primaryButton: .cancel(), secondaryButton: .default(Text("Learn More"), action: {
-            guard let url = URL(string: "https://github.com/zssz/BerkananSDK") else { return }
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-          }))
-        }, trailing: Button(action: { self.showsSettings = true }, label: { Image(systemName: "gear").font(.system(size: .init(integerLiteral: 17))).imageScale(.large).padding(5) }
-      )).sheet(isPresented: $showsSettings) {
-        self.settingsView
-      }
-    }.navigationViewStyle(StackNavigationViewStyle()).sheet(isPresented: $userData.termsNotAccepted) {
-      self.termsView
-    }
+    return NavigationView {
+      self.messagesView.navigationBarTitle(Text("Public") + Text(" ") + Text("(\($userData.numberOfNearbyUsers.wrappedValue))")).navigationBarItems(
+        trailing: Button(action: { self.userData.showsPreferences = true }, label: { Image(systemName: "gear").imageScale(.large).padding(5) }
+      )).sheet(isPresented: self.$userData.showsPreferences) { self.settingsView }
+    }.navigationViewStyle(StackNavigationViewStyle()).sheet(isPresented: $userData.termsNotAccepted) { self.termsView }
   }
   
   private var messagesView: some View {
-    List {
-      ForEach(messageStore.messages) { message in
-        // Don't show messages from blocked users
-        if !self.userData.isBlocked(user: message.sourceUser) {
-          // Don't show flagged messages if user doesn't want to seem them
-          if self.userData.showFlaggedMessagesEnabled ||
-            (!self.userData.showFlaggedMessagesEnabled && !self.userData.isFlagged(message: message)) {
-            MessageRow(message: message).contextMenu {
-              Button(action: { UIPasteboard.general.string = [message.sourceUser.name, message.text].joined(separator: "\n") }) {
-                Text("Copy")
-                Image(systemName: "doc.on.doc")
-              }
-              if message.sourceUser != User.current {
-                if self.userData.isFlagged(message: message) {
-                  Button(action: { self.userData.unflag(message: message) }) {
-                    Text("Unflag")
-                    Image(systemName: "flag.slash")
+    ZStack(alignment: .bottom) {
+      VStack {
+        if !self.messageStore.messages.isEmpty {
+          List {
+            ForEach(self.messageStore.messages) { message in
+              // Don't show messages from blocked users
+              if !self.userData.isBlocked(user: message.sourceUser) {
+                // Don't show flagged messages if user doesn't want to seem them
+                if self.userData.showFlaggedMessagesEnabled ||
+                  (!self.userData.showFlaggedMessagesEnabled && !self.userData.isFlagged(message: message)) {
+                  MessageRow(message: message).environmentObject(self.userData).contextMenu {
+                    Button(action: { UIPasteboard.general.string = message.text }) {
+                      Text("Copy")
+                      Image(systemName: "doc.on.doc")
+                    }
+                    if message.sourceUser != User.current {
+                      if self.userData.isFlagged(message: message) {
+                        Button(action: { self.userData.unflag(message: message) }) {
+                          Text("Unflag")
+                          Image(systemName: "flag.slash")
+                        }
+                      }
+                      else {
+                        Button(action: { self.userData.flag(message: message) }) {
+                          Text("Flag")
+                          Image(systemName: "flag")
+                        }
+                      }
+                      Button(action: { self.userData.block(user: message.sourceUser) }) {
+                        Text("Block")
+                        Image(systemName: "hand.raised")
+                      }
+                    }
                   }
                 }
-                else {
-                  Button(action: { self.userData.flag(message: message) }) {
-                    Text("Flag")
-                    Image(systemName: "flag")
-                  }
-                }
-                Button(action: { self.userData.block(user: message.sourceUser) }) {
-                  Text("Block")
-                  Image(systemName: "hand.raised")
-                }
               }
+            }.onDelete { indexSet in
+              self.messageStore.remove(at: indexSet)
             }
+          }.introspectTableView { (tableView) in
+            tableView.separatorStyle = .none
+            tableView.contentInset.bottom = 44
+            tableView.keyboardDismissMode = .interactive
           }
         }
-      }.onDelete { indexSet in
-        self.messageStore.remove(at: indexSet)
+        else {
+          Spacer()
+          Text("No Messages").foregroundColor(Color.gray).modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
+          Spacer()
+          Spacer()
+        }
       }
+      #if targetEnvironment(macCatalyst)
+      TextField("Message", text: self.$userData.composedText) {
+        AppDelegate.shared?.send(self.userData.composedText)
+      }.textFieldStyle(RoundedBorderTextFieldStyle()).foregroundColor((AppDelegate.shared?.isMessageTooBig(for: self.userData.composedText) ?? false) ? .red : .primary).modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)).padding(10).background(BlurView(style: .systemChromeMaterial))
+      #endif
     }
   }
   
@@ -81,7 +88,7 @@ struct ContentView : View {
     NavigationView {
       SettingsView()
         .environmentObject(self.userData)
-        .navigationBarItems(leading: Button(action: { self.showsSettings = false }, label: { Image(systemName: "chevron.down").font(.system(size: .init(integerLiteral: 17))).imageScale(.large).padding(5) }))
+        .navigationBarItems(leading: Button(action: { self.userData.showsPreferences = false }, label: { Image(systemName: "chevron.down").imageScale(.large) }))
     }.navigationViewStyle(StackNavigationViewStyle())
   }
   
@@ -109,7 +116,7 @@ struct ContentView : View {
 #if DEBUG
 struct ContentView_Previews : PreviewProvider {
   static var previews: some View {
-    ContentView(messageStore: MessageStore(messages: [PublicMessage(text: "Hello!")]) )
+    ContentView(messageStore: MessageStore(messages: [PublicMessage(text: "Hello!")])).environmentObject(UserData())
   }
 }
 #endif

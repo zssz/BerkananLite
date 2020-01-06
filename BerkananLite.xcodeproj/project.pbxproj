@@ -14,6 +14,10 @@
 		2D1542A823327AA200E510E9 /* Bundle+Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A723327AA200E510E9 /* Bundle+Version.swift */; };
 		2D1542AA2332986F00E510E9 /* UIWindow+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */; };
 		2D1542AB2332995700E510E9 /* UIWindow+TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */; };
+		2D40B2E323C24D2900359B34 /* BerkananLiteUIScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40B2E223C24D2900359B34 /* BerkananLiteUIScreenshots.swift */; };
+		2D40B2EB23C24DC200359B34 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40B2EA23C24DC200359B34 /* SnapshotHelper.swift */; };
+		2D40B2ED23C2553F00359B34 /* AppDelegate+Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40B2EC23C2553F00359B34 /* AppDelegate+Screenshots.swift */; };
+		2D40B2EE23C2553F00359B34 /* AppDelegate+Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D40B2EC23C2553F00359B34 /* AppDelegate+Screenshots.swift */; };
 		2D445CF222BBD08500E16322 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0524EA22AE77B300518A7A /* AppDelegate.swift */; };
 		2D445CF322BBD08500E16322 /* AppDelegate+UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DBFE18A22BA642900A56BB2 /* AppDelegate+UserNotifications.swift */; };
 		2D445CF422BBD08500E16322 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0524EC22AE77B300518A7A /* SceneDelegate.swift */; };
@@ -36,13 +40,24 @@
 		2D445D2522BBD77A00E16322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D0524F522AE77BD00518A7A /* LaunchScreen.storyboard */; };
 		2D445D2622BBD78C00E16322 /* MessageInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */; };
 		2D445D2722BBD78E00E16322 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D0524F522AE77BD00518A7A /* LaunchScreen.storyboard */; };
+		2D50569523BDE67C00B4701F /* AppDelegate+SendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D50569423BDE67C00B4701F /* AppDelegate+SendMessage.swift */; };
+		2D50569623BDE67C00B4701F /* AppDelegate+SendMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D50569423BDE67C00B4701F /* AppDelegate+SendMessage.swift */; };
 		2D59166122BBCFD4007B169F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D59166022BBCFD4007B169F /* Assets.xcassets */; };
 		2D59166422BBCFD4007B169F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D59166322BBCFD4007B169F /* Preview Assets.xcassets */; };
 		2D59167222BBCFD4007B169F /* BerkananLiteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D59167122BBCFD4007B169F /* BerkananLiteUITests.swift */; };
+		2D65098423BF7DAD00750A37 /* SystemFontViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D65098323BF7DAD00750A37 /* SystemFontViewModifier.swift */; };
+		2D65098523BF7DAD00750A37 /* SystemFontViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D65098323BF7DAD00750A37 /* SystemFontViewModifier.swift */; };
 		2D68A6EA233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
 		2D68A6EB233B4199006FA1DF /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */; };
 		2D78C74423B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */; };
 		2D78C74523B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */; };
+		2D8074D323C1B87000D9439A /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 2D8074D223C1B87000D9439A /* Introspect */; };
+		2D8074D523C1BE0700D9439A /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8074D423C1BE0700D9439A /* BlurView.swift */; };
+		2D8074D623C1BE0700D9439A /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8074D423C1BE0700D9439A /* BlurView.swift */; };
+		2D8074D823C1EDB400D9439A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8074D723C1EDB400D9439A /* MenuController.swift */; };
+		2D8074D923C1EDB400D9439A /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8074D723C1EDB400D9439A /* MenuController.swift */; };
+		2D8198FC23BF8A4E00BE7358 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8198FB23BF8A4E00BE7358 /* TextView.swift */; };
+		2D8198FD23BF8A4E00BE7358 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8198FB23BF8A4E00BE7358 /* TextView.swift */; };
 		2D996BE5233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */; };
 		2D996BE6233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */; };
 		2D9F53EA237589DD003B0F9E /* UNUserNotificationCenter+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9F53E7237589DC003B0F9E /* UNUserNotificationCenter+Additions.swift */; };
@@ -71,6 +86,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2D40B2E523C24D2900359B34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D0524DF22AE77B200518A7A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D59165722BBCFD0007B169F;
+			remoteInfo = BerkananLite;
+		};
 		2D59166E22BBCFD4007B169F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D0524DF22AE77B200518A7A /* Project object */;
@@ -90,6 +112,11 @@
 		2D1024112332556C007A4BDD /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2D1542A723327AA200E510E9 /* Bundle+Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Version.swift"; sourceTree = "<group>"; };
 		2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+TopViewController.swift"; sourceTree = "<group>"; };
+		2D40B2E023C24D2900359B34 /* BerkananLiteUIScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BerkananLiteUIScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D40B2E223C24D2900359B34 /* BerkananLiteUIScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BerkananLiteUIScreenshots.swift; sourceTree = "<group>"; };
+		2D40B2E423C24D2900359B34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D40B2EA23C24DC200359B34 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
+		2D40B2EC23C2553F00359B34 /* AppDelegate+Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Screenshots.swift"; sourceTree = "<group>"; };
 		2D445CF122BBD03C00E16322 /* BerkananLite.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BerkananLite.entitlements; sourceTree = "<group>"; };
 		2D445D0422BBD57400E16322 /* SomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D445D0C22BBD57800E16322 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,7 +124,8 @@
 		2D445D1422BBD57800E16322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D445D1822BBD5AD00E16322 /* SomeApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SomeApp.entitlements; sourceTree = "<group>"; };
 		2D47307D22B4C86300B28B9F /* MessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageStore.swift; sourceTree = "<group>"; };
-		2D59165822BBCFD0007B169F /* BerkananLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BerkananLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D50569423BDE67C00B4701F /* AppDelegate+SendMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+SendMessage.swift"; sourceTree = "<group>"; };
+		2D59165822BBCFD0007B169F /* Berkanan Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Berkanan Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D59166022BBCFD4007B169F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2D59166322BBCFD4007B169F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2D59166822BBCFD4007B169F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,9 +135,13 @@
 		2D616D8522BA0EAD00FBACB8 /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageInputView.xib; sourceTree = "<group>"; };
 		2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputView.swift; sourceTree = "<group>"; };
+		2D65098323BF7DAD00750A37 /* SystemFontViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFontViewModifier.swift; sourceTree = "<group>"; };
 		2D68A6E9233B4199006FA1DF /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKStoreReviewController+Utility.swift"; sourceTree = "<group>"; };
 		2D7F15982317CF1B009DBE68 /* BerkananSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = BerkananSDK; path = ../../BerkananSDK; sourceTree = "<group>"; };
+		2D8074D423C1BE0700D9439A /* BlurView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
+		2D8074D723C1EDB400D9439A /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		2D8198FB23BF8A4E00BE7358 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
 		2D996BE4233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNNotificationContent+ActionAdditions.swift"; sourceTree = "<group>"; };
 		2D9F53E7237589DC003B0F9E /* UNUserNotificationCenter+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+Additions.swift"; sourceTree = "<group>"; };
 		2D9F53E8237589DC003B0F9E /* UNNotificationRequest+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UNNotificationRequest+Additions.swift"; sourceTree = "<group>"; };
@@ -127,6 +159,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2D40B2DD23C24D2900359B34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D445D0122BBD57400E16322 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -140,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2DD6005222BCB79D008030A3 /* BerkananSDK in Frameworks */,
+				2D8074D323C1B87000D9439A /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +203,7 @@
 				2D59165922BBCFD0007B169F /* BerkananLite */,
 				2D59167022BBCFD4007B169F /* BerkananLiteUITests */,
 				2D445D0522BBD57400E16322 /* SomeApp */,
+				2D40B2E123C24D2900359B34 /* BerkananLiteUIScreenshots */,
 				2D0524E822AE77B300518A7A /* Products */,
 				2D0524FF22AE7A6400518A7A /* Frameworks */,
 			);
@@ -171,9 +212,10 @@
 		2D0524E822AE77B300518A7A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D59165822BBCFD0007B169F /* BerkananLite.app */,
+				2D59165822BBCFD0007B169F /* Berkanan Lite.app */,
 				2D59166D22BBCFD4007B169F /* BerkananLiteUITests.xctest */,
 				2D445D0422BBD57400E16322 /* SomeApp.app */,
+				2D40B2E023C24D2900359B34 /* BerkananLiteUIScreenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,6 +225,16 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2D40B2E123C24D2900359B34 /* BerkananLiteUIScreenshots */ = {
+			isa = PBXGroup;
+			children = (
+				2D40B2E223C24D2900359B34 /* BerkananLiteUIScreenshots.swift */,
+				2D40B2EA23C24DC200359B34 /* SnapshotHelper.swift */,
+				2D40B2E423C24D2900359B34 /* Info.plist */,
+			);
+			path = BerkananLiteUIScreenshots;
 			sourceTree = "<group>";
 		};
 		2D445D0522BBD57400E16322 /* SomeApp */ = {
@@ -236,7 +288,10 @@
 			isa = PBXGroup;
 			children = (
 				2D0524EA22AE77B300518A7A /* AppDelegate.swift */,
+				2D40B2EC23C2553F00359B34 /* AppDelegate+Screenshots.swift */,
+				2D50569423BDE67C00B4701F /* AppDelegate+SendMessage.swift */,
 				2D0524EC22AE77B300518A7A /* SceneDelegate.swift */,
+				2D8074D723C1EDB400D9439A /* MenuController.swift */,
 				2D9F53F423758CA3003B0F9E /* Data */,
 				2D9F53F023758B4C003B0F9E /* Protobuf */,
 				2D9F53E6237589DC003B0F9E /* UserNotifications */,
@@ -280,8 +335,6 @@
 				2DD91ACF23335CF1009CFC03 /* BlockedUsersView.swift */,
 				2DD91AD223336470009CFC03 /* TermsView.swift */,
 				2DE3ABEC233392FF00B0BBB6 /* PrivacyView.swift */,
-				2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */,
-				2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -290,9 +343,14 @@
 			isa = PBXGroup;
 			children = (
 				2D1542A723327AA200E510E9 /* Bundle+Version.swift */,
+				2D8074D423C1BE0700D9439A /* BlurView.swift */,
+				2D65098323BF7DAD00750A37 /* SystemFontViewModifier.swift */,
+				2D8198FB23BF8A4E00BE7358 /* TextView.swift */,
 				2D1542A92332986F00E510E9 /* UIWindow+TopViewController.swift */,
 				2D10240D23322CE6007A4BDD /* UserDefaultPropertyWrapper.swift */,
 				2D78C74323B9D632005DD5CC /* SKStoreReviewController+Utility.swift */,
+				2D616D8E22BA207D00FBACB8 /* MessageInputView.swift */,
+				2D616D8D22BA207D00FBACB8 /* MessageInputView.xib */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -317,6 +375,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2D40B2DF23C24D2900359B34 /* BerkananLiteUIScreenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2D40B2E723C24D2900359B34 /* Build configuration list for PBXNativeTarget "BerkananLiteUIScreenshots" */;
+			buildPhases = (
+				2D40B2DC23C24D2900359B34 /* Sources */,
+				2D40B2DD23C24D2900359B34 /* Frameworks */,
+				2D40B2DE23C24D2900359B34 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D40B2E623C24D2900359B34 /* PBXTargetDependency */,
+			);
+			name = BerkananLiteUIScreenshots;
+			productName = BerkananLiteUIScreenshots;
+			productReference = 2D40B2E023C24D2900359B34 /* BerkananLiteUIScreenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		2D445D0322BBD57400E16322 /* SomeApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D445D1522BBD57800E16322 /* Build configuration list for PBXNativeTarget "SomeApp" */;
@@ -353,9 +429,10 @@
 			name = BerkananLite;
 			packageProductDependencies = (
 				2DD6005122BCB79D008030A3 /* BerkananSDK */,
+				2D8074D223C1B87000D9439A /* Introspect */,
 			);
 			productName = BerkananLite;
-			productReference = 2D59165822BBCFD0007B169F /* BerkananLite.app */;
+			productReference = 2D59165822BBCFD0007B169F /* Berkanan Lite.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D59166C22BBCFD4007B169F /* BerkananLiteUITests */ = {
@@ -382,10 +459,14 @@
 		2D0524DF22AE77B200518A7A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = IZE;
 				TargetAttributes = {
+					2D40B2DF23C24D2900359B34 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = 2D59165722BBCFD0007B169F;
+					};
 					2D445D0322BBD57400E16322 = {
 						CreatedOnToolsVersion = 11.0;
 					};
@@ -409,6 +490,7 @@
 			mainGroup = 2D0524DE22AE77B200518A7A;
 			packageReferences = (
 				2DD6005022BCB79D008030A3 /* XCRemoteSwiftPackageReference "BerkananSDK" */,
+				2D8074D123C1B87000D9439A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 2D0524E822AE77B300518A7A /* Products */;
 			projectDirPath = "";
@@ -417,11 +499,19 @@
 				2D59165722BBCFD0007B169F /* BerkananLite */,
 				2D59166C22BBCFD4007B169F /* BerkananLiteUITests */,
 				2D445D0322BBD57400E16322 /* SomeApp */,
+				2D40B2DF23C24D2900359B34 /* BerkananLiteUIScreenshots */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2D40B2DE23C24D2900359B34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D445D0222BBD57400E16322 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,26 +571,41 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2D40B2DC23C24D2900359B34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D40B2E323C24D2900359B34 /* BerkananLiteUIScreenshots.swift in Sources */,
+				2D40B2EB23C24DC200359B34 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2D445D0022BBD57400E16322 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2D445D1B22BBD62700E16322 /* AppDelegate.swift in Sources */,
+				2D8074D923C1EDB400D9439A /* MenuController.swift in Sources */,
 				2D1542AB2332995700E510E9 /* UIWindow+TopViewController.swift in Sources */,
+				2D65098523BF7DAD00750A37 /* SystemFontViewModifier.swift in Sources */,
+				2D40B2EE23C2553F00359B34 /* AppDelegate+Screenshots.swift in Sources */,
 				2D9F53ED23758AC8003B0F9E /* UNNotificationContent+Additions.swift in Sources */,
 				2D445D1C22BBD62700E16322 /* AppDelegate+UserNotifications.swift in Sources */,
 				2D9F53EE23758ACB003B0F9E /* UNNotificationRequest+Additions.swift in Sources */,
 				2D445D1D22BBD62700E16322 /* SceneDelegate.swift in Sources */,
 				2DC3D5222329454900A6D388 /* UserData.swift in Sources */,
 				2D445D1E22BBD62700E16322 /* ContentView.swift in Sources */,
+				2D8074D623C1BE0700D9439A /* BlurView.swift in Sources */,
 				2DD91AD423336470009CFC03 /* TermsView.swift in Sources */,
 				2DC184082333AF38003727F1 /* Bundle+Version.swift in Sources */,
 				2DC1840A2333AF4F003727F1 /* PublicMessage+Identifiable.swift in Sources */,
 				2D1024132332556C007A4BDD /* SettingsView.swift in Sources */,
 				2D78C74523B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */,
+				2D8198FD23BF8A4E00BE7358 /* TextView.swift in Sources */,
 				2DD91AD123335CF1009CFC03 /* BlockedUsersView.swift in Sources */,
 				2DC184092333AF40003727F1 /* UserDefaultPropertyWrapper.swift in Sources */,
 				2D445D1F22BBD62700E16322 /* MessagesViewController.swift in Sources */,
+				2D50569623BDE67C00B4701F /* AppDelegate+SendMessage.swift in Sources */,
 				2D996BE6233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */,
 				2D445D2022BBD62700E16322 /* MessageInputView.swift in Sources */,
 				2D445D2222BBD62700E16322 /* MessageStore.swift in Sources */,
@@ -517,9 +622,13 @@
 				2D445CF222BBD08500E16322 /* AppDelegate.swift in Sources */,
 				2D1024102332309A007A4BDD /* PublicMessage+Identifiable.swift in Sources */,
 				2DD91AD023335CF1009CFC03 /* BlockedUsersView.swift in Sources */,
+				2D8198FC23BF8A4E00BE7358 /* TextView.swift in Sources */,
+				2D40B2ED23C2553F00359B34 /* AppDelegate+Screenshots.swift in Sources */,
 				2D445CF322BBD08500E16322 /* AppDelegate+UserNotifications.swift in Sources */,
+				2D8074D523C1BE0700D9439A /* BlurView.swift in Sources */,
 				2D9F53EB237589DD003B0F9E /* UNNotificationRequest+Additions.swift in Sources */,
 				2D445CF422BBD08500E16322 /* SceneDelegate.swift in Sources */,
+				2D8074D823C1EDB400D9439A /* MenuController.swift in Sources */,
 				2DC3D521232944AF00A6D388 /* UserData.swift in Sources */,
 				2D445CF522BBD08500E16322 /* ContentView.swift in Sources */,
 				2D445CF622BBD08500E16322 /* MessagesViewController.swift in Sources */,
@@ -527,6 +636,7 @@
 				2D445CF722BBD08500E16322 /* MessageInputView.swift in Sources */,
 				2D1542AA2332986F00E510E9 /* UIWindow+TopViewController.swift in Sources */,
 				2D78C74423B9D632005DD5CC /* SKStoreReviewController+Utility.swift in Sources */,
+				2D65098423BF7DAD00750A37 /* SystemFontViewModifier.swift in Sources */,
 				2DE3ABED233392FF00B0BBB6 /* PrivacyView.swift in Sources */,
 				2D1024122332556C007A4BDD /* SettingsView.swift in Sources */,
 				2D996BE5233E0BE1003CAF5F /* UNNotificationContent+ActionAdditions.swift in Sources */,
@@ -535,6 +645,7 @@
 				2D445CF922BBD08500E16322 /* MessageStore.swift in Sources */,
 				2D445CFA22BBD08500E16322 /* MessageRow.swift in Sources */,
 				2DD91AD323336470009CFC03 /* TermsView.swift in Sources */,
+				2D50569523BDE67C00B4701F /* AppDelegate+SendMessage.swift in Sources */,
 				2D9F53EA237589DD003B0F9E /* UNUserNotificationCenter+Additions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -550,6 +661,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2D40B2E623C24D2900359B34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2D59165722BBCFD0007B169F /* BerkananLite */;
+			targetProxy = 2D40B2E523C24D2900359B34 /* PBXContainerItemProxy */;
+		};
 		2D59166F22BBCFD4007B169F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2D59165722BBCFD0007B169F /* BerkananLite */;
@@ -683,6 +799,46 @@
 			};
 			name = Release;
 		};
+		2D40B2E823C24D2900359B34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S647QX78WZ;
+				INFOPLIST_FILE = BerkananLiteUIScreenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLiteUIScreenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BerkananLite;
+			};
+			name = Debug;
+		};
+		2D40B2E923C24D2900359B34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S647QX78WZ;
+				INFOPLIST_FILE = BerkananLiteUIScreenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLiteUIScreenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = BerkananLite;
+			};
+			name = Release;
+		};
 		2D445D1622BBD57800E16322 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -698,7 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -722,7 +878,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -736,7 +892,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BerkananLite/BerkananLite.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "BerkananLite/Preview\\ Content";
 				DEVELOPMENT_TEAM = S647QX78WZ;
@@ -746,9 +905,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Berkanan Lite";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -760,7 +922,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = BerkananLite/BerkananLite.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
+				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_ASSET_PATHS = "BerkananLite/Preview\\ Content";
 				DEVELOPMENT_TEAM = S647QX78WZ;
@@ -770,9 +935,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Berkanan Lite";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -831,6 +999,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		2D40B2E723C24D2900359B34 /* Build configuration list for PBXNativeTarget "BerkananLiteUIScreenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2D40B2E823C24D2900359B34 /* Debug */,
+				2D40B2E923C24D2900359B34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2D445D1522BBD57800E16322 /* Build configuration list for PBXNativeTarget "SomeApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -861,6 +1038,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2D8074D123C1B87000D9439A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/timbersoftware/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
 		2DD6005022BCB79D008030A3 /* XCRemoteSwiftPackageReference "BerkananSDK" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/zssz/BerkananSDK.git";
@@ -872,6 +1057,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2D8074D223C1B87000D9439A /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2D8074D123C1B87000D9439A /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
 		2DD6005122BCB79D008030A3 /* BerkananSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2DD6005022BCB79D008030A3 /* XCRemoteSwiftPackageReference "BerkananSDK" */;
