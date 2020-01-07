@@ -20,7 +20,7 @@ struct SettingsView: View {
         }, onDecrement: {
           guard self.userData.bodyFontSize > UserData.minimumBodyFontSize else { return }
           self.userData.bodyFontSize -= 2
-        }, label: { Text("Font Size").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)) })
+        }, label: { Text("Text Size").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)) })
       }
       #endif
       Section(footer: Text("When turned on, the app icon badge shows the number of nearby users.").modifier(SystemFont(font: .footnote, sizeOnMacCatalyst: self.$userData.footnoteFontSize))) {
