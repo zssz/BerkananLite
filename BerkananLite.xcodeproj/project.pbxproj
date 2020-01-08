@@ -1054,7 +1054,7 @@
 			repositoryURL = "https://github.com/zssz/BerkananSDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 2.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
