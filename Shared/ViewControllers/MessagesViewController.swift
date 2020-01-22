@@ -12,7 +12,7 @@ import StoreKit
 import Combine
 
 class MessagesViewController: UIHostingController<AnyView> {
-    
+  
   // Used to prompt user for review
   private static var numberOfSentMessages = 0
   
@@ -23,26 +23,26 @@ class MessagesViewController: UIHostingController<AnyView> {
   }
   
   @objc func hidePreferences() {
-    AppDelegate.shared?.userData.showsPreferences = false
+    ApplicationController.shared.userData.showsPreferences = false
   }
   
   // TODO: remove this when `Text` will get clickable links
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     let availableWidth = view.bounds.size.width - view.layoutMargins.left - view.layoutMargins.right + 2
-    AppDelegate.shared?.userData.maxWidth = availableWidth
+    ApplicationController.shared.userData.maxWidth = availableWidth
   }
   
-  #if !targetEnvironment(macCatalyst)
+  #if !targetEnvironment(macCatalyst) && !os(tvOS)
   
   private var textDidChangeNotificationCanceller: AnyCancellable?
   
-  private var userDataChangeCanceller: AnyCancellable?
+  private var userDataComposedTextChangeCanceller: AnyCancellable?
   
   override var canBecomeFirstResponder: Bool {
     return true
   }
-
+  
   override var inputAccessoryView: UIView? {
     if let presentedViewController = self.presentedViewController, !presentedViewController.isBeingDismissed {
       return nil
@@ -54,33 +54,39 @@ class MessagesViewController: UIHostingController<AnyView> {
     let view = self.nibBundle?.loadNibNamed("MessageInputView", owner: self, options: nil)?.first as? MessageInputView
     view?.sendButton.addTarget(self, action: #selector(handleTapSendButton), for: .touchUpInside)
     view?.textField.clearsOnBeginEditing = false
-    view?.textField.text = AppDelegate.shared?.userData.composedText
-    textDidChangeNotificationCanceller = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: view?.textField).sink { [weak self] notification in
-      guard let self = self else { return }
-      AppDelegate.shared?.userData.composedText = self.messageInputView?.textField.text ?? ""
-      self.configureMessageInputView()
-    }
-    // Use async to not get into recursive trap when initializing
-    DispatchQueue.main.async {
-      self.configureMessageInputView()
-    }
-    userDataChangeCanceller = AppDelegate.shared?.userData.objectWillChange.sink(receiveValue: { [weak self] (value) in
-      // Use async so object has the change already
-      DispatchQueue.main.async {
-        guard let self = self else { return }
-        if self.messageInputView?.textField.text != AppDelegate.shared?.userData.composedText {
-          self.messageInputView?.textField.text = AppDelegate.shared?.userData.composedText
-          self.configureMessageInputView()
-        }
-      }
-    })
+    view?.textField.text = ApplicationController.shared.userData.composedText
     return view
   }()
+      
+  override init(rootView: AnyView) {
+    super.init(rootView: rootView)
+    self.commonInit()
+  }
+  
+  @objc required dynamic init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+    self.commonInit()
+  }
+  
+  private func commonInit() {
+    self.configureMessageInputView()
+    self.textDidChangeNotificationCanceller = NotificationCenter.default.publisher(for: UITextField.textDidChangeNotification, object: self.messageInputView?.textField).sink { [weak self] notification in
+      guard let self = self else { return }
+      ApplicationController.shared.userData.composedText = self.messageInputView?.textField.text ?? ""
+      self.configureMessageInputView()
+    }
+    self.userDataComposedTextChangeCanceller = ApplicationController.shared.userData.$composedText.sink { [weak self] (value) in
+      guard let self = self else { return }
+      self.messageInputView?.textField.text = value
+      DispatchQueue.main.async {
+        self.configureMessageInputView()
+      }
+    }
+  }
   
   private func configureMessageInputView() {
-    guard let appDelegate = AppDelegate.shared else { return }
-    let text = AppDelegate.shared?.userData.composedText ?? ""
-    let isPDUTooBig = appDelegate.isMessageTooBig(for: text)
+    let text = ApplicationController.shared.userData.composedText
+    let isPDUTooBig = ApplicationController.shared.isMessageTooLong(for: text)
     messageInputView?.textField.textColor = isPDUTooBig ? .systemRed : .label
     messageInputView?.sendButton.isHidden = text.isEmpty
     messageInputView?.setNeedsLayout()
@@ -88,10 +94,10 @@ class MessagesViewController: UIHostingController<AnyView> {
       self.messageInputView?.layoutIfNeeded()
     }
   }
-    
+  
   @objc func handleTapSendButton() {
-    guard let text = AppDelegate.shared?.userData.composedText else { return }
-    AppDelegate.shared?.send(text)
+    let text = ApplicationController.shared.userData.composedText
+    ApplicationController.shared.send(text)
     messageInputView?.textField.resignFirstResponder()
   }
   

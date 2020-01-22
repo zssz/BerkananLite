@@ -19,7 +19,11 @@ public class MessageInputView: UIView {
     super.awakeFromNib()
     self.textField.text = ""
     self.sendButton.setTitle(NSLocalizedString("Send", comment: ""), for: UIControl.State())
+    #if !os(tvOS)
     visualEffectView.effect = UIBlurEffect(style: .systemChromeMaterial)
+    #else
+    visualEffectView.effect = UIBlurEffect(style: .regular)
+    #endif
     textField.topAnchor.constraint(equalTo: topAnchor, constant: 5.0).isActive = true
   }
   

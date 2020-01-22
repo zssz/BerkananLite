@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>BerkananLite-tvOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>7</integer>
+		</dict>
 		<key>BerkananLite.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,7 +22,7 @@
 		<key>BerkananLiteUIScreenshots.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<key>Proba.xcscheme_^#shared#^_</key>
 		<dict>
@@ -27,7 +32,12 @@
 		<key>SomeApp.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
+		</dict>
+		<key>Watch.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -43,6 +53,21 @@
 			<true/>
 		</dict>
 		<key>2D59166C22BBCFD4007B169F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D82492823D189BD0011F7D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D82492B23D189BD0011F7D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2D99A73523D8427800D17CEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

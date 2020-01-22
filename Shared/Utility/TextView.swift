@@ -1,6 +1,8 @@
 //
-//  Created by Zsombor Szabo on 03/01/2020.
-//  Copyright © 2020 IZE. All rights reserved.
+// Copyright © 2019 IZE Ltd. and the project authors
+// Licensed under MIT License
+//
+// See LICENSE.txt for license information.
 //
 
 import Foundation
@@ -59,14 +61,16 @@ class MultilineTextView: UITextView {
     self.adjustsFontForContentSizeCategory = true
     self.isSelectable = true
     self.isScrollEnabled = false
-    self.isEditable = false
     self.showsVerticalScrollIndicator = false
     self.showsHorizontalScrollIndicator = false
     self.textContainerInset = .zero
     self.textContainer.lineFragmentPadding = 0
     self.textColor = .label
     self.backgroundColor = .clear
+    #if !os(tvOS)
+    self.isEditable = false
     self.dataDetectorTypes = .all
+    #endif
   }
   
   override var intrinsicContentSize: CGSize {

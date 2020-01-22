@@ -7,150 +7,65 @@
 
 import UIKit
 import BerkananSDK
-import Combine
-import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
-  public static var shared: AppDelegate? {
-      (UIApplication.shared.delegate as? AppDelegate)
-  }
-  
-  static let berkananLiteServiceConfigurationIdentifier = UUID(uuidString: "A59240D8-26DF-47C5-A3A7-CC2B5DEB8919")!
-  
-  public var berkananBluetoothService = try! BerkananBluetoothService(configuration: Configuration(identifier: berkananLiteServiceConfigurationIdentifier))
-  
-  var numberOfSentMessages = 0
-  
-  public var messageStore = MessageStore()
-  
-  var receiveMessageCanceller: AnyCancellable?
-  var numberOfNearbyUsersCanceller: AnyCancellable?
-  
-  var userData = UserData()
-  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    if userData.firstRun {
-      userData.firstRun = false
+    if ApplicationController.shared.userData.firstRun {
+      ApplicationController.shared.userData.firstRun = false
     }
     else {
-      setupTerms()
-      berkananBluetoothService.start()
+      ApplicationController.shared.userData.termsNotAccepted = !ApplicationController.shared.userData.termsAcceptButtonTapped
+      ApplicationController.shared.berkananBluetoothService.start()
     }
-    
-    /*
-    do {
-      // Initializing a local service with a configuration to advertise
-      let configuration = Configuration(
-        identifier: UUID(),
-        userInfo: "My User Info".data(using: .utf8)!
-      )
-      let service = try BerkananBluetoothService(configuration: configuration)
-      
-      // Starting a local service
-      service.start()
-      
-      // Discovering remote services and examining their configuration
-      let discoverServiceCanceller = service.discoverServiceSubject
-        .receive(on: RunLoop.main)
-        .sink { service in
-          print("Discovered \(service) with \(service.getConfiguration())")
-      }
-      
-      // Constructing a message with a payload type identifier and payload
-      let message = Message(
-        payloadType: UUID(uuidString: "E268F3C1-5ADB-4412-BE04-F4A04F9B3D1A")!,
-        payload: "Hello, World!".data(using: .utf8)
-      )
-      
-      // Sending a message
-      try service.send(message)
-      
-      // Receiving messages
-      let receiveMessageCanceller = service.receiveMessageSubject
-        .receive(on: RunLoop.main)
-        .sink { message in
-          print("Received \(message.payloadType) \(message.payload)")
-      }
+    if ApplicationController.shared.isScreenshoting {
+      ApplicationController.shared.prepareForScreenshots()
     }
-    catch {
-    }
- */
- 
-    receiveMessageCanceller = berkananBluetoothService.receiveMessageSubject
-    .sink { message in
-      switch message.payloadType {
-        
-        case .publicMessage:
-          guard let publicMessage = try? PublicMessage(serializedData: message.payload) else { return }
-          DispatchQueue.main.async {
-            
-            guard !self.userData.isBlocked(user: publicMessage.sourceUser) else { return }
-            self.messageStore.insert(message: publicMessage, at: 0)
-            
-            // Notify user if needed
-            // Only post notification if the app is in the background
-            #if !targetEnvironment(macCatalyst)
-            guard UIApplication.shared.applicationState == .background else { return }
-            #endif
-            // Don't post notification for messages sent by current user
-            guard publicMessage.sourceUser != User.current else { return }
-            UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
-              DispatchQueue.main.async {
-                self.userData.notificationsAuthorizationStatus = settings.authorizationStatus
-                // Don't post notification if user can't see it
-                guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
-                // Don't post if not enabled
-                if settings.authorizationStatus == .authorized && !self.userData.notificationsEnabled {
-                  return
-                }
-                UNUserNotificationCenter.current().add(UNNotificationRequest(publicMessage: publicMessage), withCompletionHandler: nil)
-              }
-            })
-          }
-        
-        default: ()
-      }
-    }
-    setupUserNotifications()
-    setupApplicationIconBadgeNumber()
-    setupCurrentUserNameAndIdentifier()
-    
-    if isScreenshoting {
-      prepareForScreenshots()
-    }
-
+       
     return true
   }
   
-  private func setupTerms() {
-    userData.termsNotAccepted = !userData.termsAcceptButtonTapped
-  }
-  
-  func setupCurrentUserNameAndIdentifier() {
-    User.current.name = userData.currentUserName
-    User.current.identifier = UUID(uuidString: userData.currentUserUUIDString)?.protobufValue() ?? PBUUID.random()
-  }
-  
-  private func setupUserNotifications() {
-    configureCurrentUserNotificationCenter()
-    requestUserNotificationAuthorization(provisional: true)
-  }
-  
-  /// Configures application icon badge number to show number of nearby users
-  private func setupApplicationIconBadgeNumber() {
-    UIApplication.shared.applicationIconBadgeNumber = berkananBluetoothService.servicesInRange.count
-    numberOfNearbyUsersCanceller = berkananBluetoothService.publisher(for: \.servicesInRange)
-    .receive(on: RunLoop.main)
-    .sink(receiveValue: { (value) in
-      let number = value.count
-      if !self.isScreenshoting {
-        self.userData.numberOfNearbyUsers = number
-      }
-      UIApplication.shared.applicationIconBadgeNumber = number
-    })
+  private func frameworkTest() {
+    /*
+       do {
+         // Initializing a local service with a configuration to advertise
+         let configuration = Configuration(
+           identifier: UUID(),
+           userInfo: "My User Info".data(using: .utf8)!
+         )
+         let service = try BerkananBluetoothService(configuration: configuration)
+         
+         // Starting a local service
+         service.start()
+         
+         // Discovering remote services and examining their configuration
+         let discoverServiceCanceller = service.discoverServiceSubject
+           .receive(on: RunLoop.main)
+           .sink { service in
+             print("Discovered \(service) with \(service.getConfiguration())")
+         }
+         
+         // Constructing a message with a payload type identifier and payload
+         let message = Message(
+           payloadType: UUID(uuidString: "E268F3C1-5ADB-4412-BE04-F4A04F9B3D1A")!,
+           payload: "Hello, World!".data(using: .utf8)
+         )
+         
+         // Sending a message
+         try service.send(message)
+         
+         // Receiving messages
+         let receiveMessageCanceller = service.receiveMessageSubject
+           .receive(on: RunLoop.main)
+           .sink { message in
+             print("Received \(message.payloadType) \(message.payload)")
+         }
+       }
+       catch {
+       }
+    */
   }
   
   func applicationWillTerminate(_ application: UIApplication) {
@@ -173,32 +88,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // MARK: - Menus
     
+  #if !os(tvOS)
   var menuController: MenuController!
+  #endif
   
-  override func buildMenu(with builder: UIMenuBuilder) {
-    if builder.system == .main {
-      menuController = MenuController(with: builder)
-    }
-  }
-  
-  override func validate(_ command: UICommand) {
-    if command.action == #selector(makeTextSmaller) {
-      command.attributes = (self.userData.bodyFontSize > UserData.minimumBodyFontSize) ? [] : .disabled
-    }
-    else if command.action == #selector(showPreferences) {
-      command.attributes = (self.userData.showsPreferences) ? .disabled : []
-    }
-  }
-  
-  @objc public func makeTextBigger() {
-    self.userData.bodyFontSize += 2
-  }
-  
-  @objc public func makeTextSmaller() {
-    self.userData.bodyFontSize -= 2
-  }
-  
-  @objc public func showPreferences() {
-    self.userData.showsPreferences = true
-  }
 }

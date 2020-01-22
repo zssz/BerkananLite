@@ -18,8 +18,11 @@ struct PrivacyView: View {
   
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
-      Text("TL;DR: We don't collect your personal information.").font(.headline).fixedSize(horizontal: false, vertical: true).padding()
-      Text(text).fixedSize(horizontal: false, vertical: true).padding()
+      VStack(alignment: .leading) {
+        Text("We don't collect your personal information.").font(.headline)
+        Spacer()
+        Text(verbatim: self.text)
+      }.padding()
     }.navigationBarTitle(Text("Privacy Policy"))
   }
 }

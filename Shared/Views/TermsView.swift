@@ -18,8 +18,11 @@ struct TermsView: View {
   
   var body: some View {
     ScrollView(.vertical, showsIndicators: true) {
-      Text("TL;DR: Be a good person. Please don't post objectionable content and don't be abusive.").font(.headline).fixedSize(horizontal: false, vertical: true).padding()
-      Text(text).fixedSize(horizontal: false, vertical: true).padding()
+      VStack(alignment: .leading) {
+        Text("Be a good person. Please don't post objectionable content and don't be abusive.").font(.headline)
+        Spacer()
+        Text(verbatim: self.text)
+      }.padding()
     }.navigationBarTitle(Text("Terms of Use"))
   }
 }

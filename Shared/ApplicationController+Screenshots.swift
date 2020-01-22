@@ -1,25 +1,27 @@
 //
-//  Created by Zsombor Szabo on 05/01/2020.
-//  Copyright © 2020 IZE. All rights reserved.
+// Copyright © 2019 IZE Ltd. and the project authors
+// Licensed under MIT License
+//
+// See LICENSE.txt for license information.
 //
 
 import Foundation
 import BerkananSDK
 
-extension AppDelegate {
+extension ApplicationController {
   
   var isScreenshoting: Bool {
-//    return true
-    return ProcessInfo.processInfo.arguments.contains("-ui_testing")
+    return true
+//    return ProcessInfo.processInfo.arguments.contains("-ui_testing")
   }
   
   func prepareForScreenshots() {
-    berkananBluetoothService.stop()
-    userData.firstRun = false
-    userData.termsAcceptButtonTapped = true
-    userData.currentUserName = "John"
-    userData.currentUserUUIDString = "90D8A7BE-006A-4A13-91CB-5D1902E1FDA4"
-    userData.numberOfNearbyUsers = 3
+    self.berkananBluetoothService.stop()
+    self.userData.firstRun = false
+    self.userData.termsAcceptButtonTapped = true
+    self.userData.numberOfNearbyUsers = 3
+    self.userData.currentUserName = "John"
+    self.userData.currentUserUUIDString = "90D8A7BE-006A-4A13-91CB-5D1902E1FDA4"
     let john = User.current
     let kate = User.with {
       $0.identifier = UUID(uuidString: "ACDA73BA-0AE5-4C53-8B82-63AEDA49EDCF")!.protobufValue()
@@ -37,7 +39,14 @@ extension AppDelegate {
       $0.identifier = .random()
       $0.sourceUser = john
       $0.text = NSLocalizedString("Suggestions for a new TV series to watch? 🤔", comment: "Message used in app screenshots.")
-    }), at: 0)
+    }), at: 0)    
+//    for _ in 0...1000 {
+//      messageStore.insert(message: PublicMessage.with({
+//        $0.identifier = .random()
+//        $0.sourceUser = [john, kate, simone, michael].randomElement()!
+//        $0.text = String((0..<Int.random(in: 0..<140)).map{ _ in "abcdefghij klmnopqrst uvwxyzABCD EFGHIJKLMN OPQRSTUVW XYZ0123456789 🤓".randomElement()! })
+//      }), at: 0)
+//    }
     self.messageStore.insert(message: PublicMessage.with({
       $0.identifier = .random()
       $0.sourceUser = kate
@@ -53,5 +62,5 @@ extension AppDelegate {
       $0.sourceUser = simone
       $0.text = "Stranger Things!"
     }), at: 0)
-  }  
+  }
 }

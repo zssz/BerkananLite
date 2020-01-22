@@ -8,9 +8,63 @@
 import Foundation
 import UserNotifications
 import BerkananSDK
+#if os(watchOS)
+import WatchKit
+#else
 import UIKit
+#endif
 
-extension AppDelegate {
+extension ApplicationController {
+  
+  public func configureCurrentUserNotificationCenter() {
+    let center = UNUserNotificationCenter.current()
+    
+    // IMPORTANT: When exporting for localizations Xcode doesn't look for NSString.localizedUserNotificationString(forKey:, arguments:)). Make sure they are exported also by marking them with NSLocalizedString.
+    // _ = NSLocalizedString("Message", comment: "")
+    // _ = NSLocalizedString("Send", comment: "")
+    // _ = NSLocalizedString("Reply", comment: "")
+    // _ = NSLocalizedString("Block", comment: "")
+    // _ = NSLocalizedString("%u more messages", comment: "")
+    
+    #if !os(tvOS)
+    let replyAction = UNTextInputNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Reply.rawValue, title: NSString.localizedUserNotificationString(forKey: "Reply", arguments: nil), options: [], textInputButtonTitle: NSString.localizedUserNotificationString(forKey: "Send", arguments: nil), textInputPlaceholder: NSString.localizedUserNotificationString(forKey: "Message", arguments: nil))
+    
+    let blockAction = UNNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Block.rawValue, title: NSString.localizedUserNotificationString(forKey: "Block", arguments: nil), options: [])
+    
+    #if os(watchOS)
+    let publicMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], options: [.customDismissAction])
+    #else
+    let publicMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
+    #endif
+    
+    center.setNotificationCategories([publicMessageCategory])
+    #endif
+    center.delegate = self
+  }
+  
+  public func postUserNotificationIfNeeded(for publicMessage: PublicMessage) {
+    // Notify user if needed
+    // Only post notification if the app is in the background
+    #if os(watchOS)
+    guard WKExtension.shared().applicationState == .background else { return }
+    #elseif !targetEnvironment(macCatalyst)
+    guard UIApplication.shared.applicationState == .background else { return }
+    #endif
+    // Don't post notification for messages sent by current user
+    guard publicMessage.sourceUser.identifier != User.current.identifier else { return }
+    UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
+      DispatchQueue.main.async {
+        self.userData.notificationsAuthorizationStatus = settings.authorizationStatus
+        // Don't post notification if user can't see it
+        guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+        // Don't post if not enabled
+        if settings.authorizationStatus == .authorized && !self.userData.notificationsEnabled {
+          return
+        }
+        UNUserNotificationCenter.current().add(UNNotificationRequest(publicMessage: publicMessage), withCompletionHandler: nil)
+      }
+    })
+  }
   
   public func setupNotificationSettings() {
     UNUserNotificationCenter.current().getNotificationSettings(completionHandler: { (settings) in
@@ -26,51 +80,21 @@ extension AppDelegate {
       self.setupNotificationSettings()
       if !provisional && !granted {
         DispatchQueue.main.async {
-          self.showNotificationsDenied()
+          self.present(error: ApplicationError.notificationsPermissionDenied as NSError)
         }
       }
     })
-  }
-  
-  public func showNotificationsDenied() {
-    let message = NSLocalizedString("Access to Notifications denied.", comment: "")
-    let alertController = UIAlertController(title: NSLocalizedString("Error", comment: ""), message: message, preferredStyle: .alert)
-    alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: ""), style: .default, handler: { (action) in
-      guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-      UIApplication.shared.open(url, options: [:], completionHandler: nil)
-    }))
-    alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .cancel, handler: nil))
-    (UIApplication.shared.connectedScenes.first { $0.delegate is UIWindowSceneDelegate }?.delegate as? UIWindowSceneDelegate)?.window??.topViewController?.present(alertController, animated: true, completion: nil)
-  }
-  
-  public func configureCurrentUserNotificationCenter() {
-    let center = UNUserNotificationCenter.current()
-    
-    // IMPORTANT: When exporting for localizations Xcode doesn't look for NSString.localizedUserNotificationString(forKey:, arguments:)). Make sure they are exported also by marking them with NSLocalizedString.
-    // _ = NSLocalizedString("Message", comment: "")
-    // _ = NSLocalizedString("Send", comment: "")
-    // _ = NSLocalizedString("Reply", comment: "")
-    // _ = NSLocalizedString("Block", comment: "")
-    // _ = NSLocalizedString("%u more messages", comment: "")
-    
-    let replyAction = UNTextInputNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Reply.rawValue, title: NSString.localizedUserNotificationString(forKey: "Reply", arguments: nil), options: [], textInputButtonTitle: NSString.localizedUserNotificationString(forKey: "Send", arguments: nil), textInputPlaceholder: NSString.localizedUserNotificationString(forKey: "Message", arguments: nil))
-    
-    let blockAction = UNNotificationAction(identifier: UNNotificationContent.ActionIdentifier.Block.rawValue, title: NSString.localizedUserNotificationString(forKey: "Block", arguments: nil), options: [])
-    
-    let publicMessageCategory = UNNotificationCategory(identifier: UNNotificationContent.CategoryType.PublicMessage.rawValue, actions: [replyAction, blockAction], intentIdentifiers: [], hiddenPreviewsBodyPlaceholder: NSLocalizedString("%u Messages", comment: "Message, not e-mail."), categorySummaryFormat: NSString.localizedUserNotificationString(forKey: "%u more messages", arguments: nil), options: [.customDismissAction, .hiddenPreviewsShowSubtitle])
-    
-    center.setNotificationCategories([publicMessageCategory])
-    center.delegate = self
-  }
+  }  
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
+extension ApplicationController: UNUserNotificationCenterDelegate {
   
-  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+  public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
     completionHandler([.alert, .sound])
   }
   
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+  #if !os(tvOS)
+  public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     let notification = response.notification
     let category = notification.request.content.categoryIdentifier
     
@@ -106,8 +130,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
               do {
                 let payload = try publicMessage.serializedData()
                 let message = Message(payloadType: .publicMessage, payload: payload)
-                try berkananBluetoothService.send(message)
-                berkananBluetoothService.receiveMessageSubject.send(message)
+                try self.berkananBluetoothService.send(message)
+                self.berkananBluetoothService.receiveMessageSubject.send(message)
               }
               catch {}
           }
@@ -120,7 +144,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
           
           case UNNotificationContent.CategoryType.PublicMessage.rawValue:
             if let uuid = UUID(uuidString: notification.request.identifier), let message = self.messageStore.messages.first(where: {$0.identifier.foundationValue() == uuid}) {
-              userData.block(user: message.sourceUser)
+              self.userData.block(user: message.sourceUser)
           }
           
           default: ()
@@ -131,9 +155,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     completionHandler()
   }
+  #endif
 }
 
-extension AppDelegate {
+extension ApplicationController {
   
   public func showPublicMessage(with uuid: UUID) {
     // TODO: Implement this feature in your app

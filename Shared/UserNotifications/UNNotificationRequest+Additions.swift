@@ -18,11 +18,13 @@ extension UNNotificationRequest {
     publicMessage message: PublicMessage
   ) {
     let notificationContent = UNMutableNotificationContent()
+    #if !os(tvOS)
     notificationContent.categoryIdentifier =
       UNNotificationContent.CategoryType.PublicMessage.rawValue
     notificationContent.title = message.sourceUser.displayName
     notificationContent.subtitle = NSLocalizedString("Public", comment: "")
     notificationContent.body = message.text
+    #endif
     self.init(
       identifier: message.identifier.foundationValue()?.uuidString ?? "",
       content: notificationContent,

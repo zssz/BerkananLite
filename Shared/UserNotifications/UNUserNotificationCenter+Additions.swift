@@ -16,6 +16,7 @@ extension UNUserNotificationCenter {
   public func removeDeliveredNotifications(
     forCategoryIdentifier categoryIdentifier: String
   ) {
+    #if !os(tvOS)
     self.getDeliveredNotifications(
       completionHandler: { [weak self] (notifications) in
         let notificationsToRemove = notifications.filter {
@@ -25,6 +26,7 @@ extension UNUserNotificationCenter {
           withIdentifiers: notificationsToRemove.map { $0.request.identifier }
         )
     })
+    #endif
   }    
 }
 #endif

@@ -1,9 +1,9 @@
-/*
- See LICENSE folder for this sample’s licensing information.
- 
- Abstract:
- Menu construction extensions for this sample.
- */
+//
+// Copyright © 2019 IZE Ltd. and the project authors
+// Licensed under MIT License
+//
+// See LICENSE.txt for license information.
+//
 
 import UIKit
 

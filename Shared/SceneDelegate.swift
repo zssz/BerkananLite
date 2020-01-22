@@ -23,8 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     if let windowScene = scene as? UIWindowScene {
       let window = UIWindow(windowScene: windowScene)
       self.window = window
-      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }            
-      window.rootViewController = MessagesViewController(rootView: AnyView(ContentView(messageStore: appDelegate.messageStore).environmentObject(appDelegate.userData)))
+      window.rootViewController = MessagesViewController(rootView: AnyView(ContentView(messageStore: ApplicationController.shared.messageStore).environmentObject(ApplicationController.shared.userData)))
       windowScene.sizeRestrictions?.minimumSize = CGSize(width: 384, height: 384)
       #if targetEnvironment(macCatalyst)
       if let titlebar = windowScene.titlebar {

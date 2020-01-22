@@ -16,8 +16,12 @@ struct MessageRow : View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 0) {
-      Text(self.message.sourceUser.displayName).modifier(SystemFont(font: Font.body.weight(.semibold), sizeOnMacCatalyst: self.self.$userData.bodyFontSize, weight: .semibold, design: .default))
-      TextView(text: self.message.text, maxWidth: self.$userData.maxWidth, fontSizeOnMacCatalyst: self.self.$userData.bodyFontSize)
+      Text(verbatim: self.message.sourceUser.displayName).modifier(SystemFont(font: Font.body.weight(.semibold), sizeOnMacCatalyst: self.$userData.bodyFontSize, weight: .semibold, design: .default))
+      #if os(watchOS)
+      Text(verbatim: self.message.text).font(.body)
+      #else
+      TextView(text: self.message.text, maxWidth: self.$userData.maxWidth, fontSizeOnMacCatalyst: self.$userData.bodyFontSize)
+      #endif
     }
   }
 }

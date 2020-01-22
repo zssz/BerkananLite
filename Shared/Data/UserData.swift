@@ -10,8 +10,15 @@ import SwiftUI
 import Combine
 import UserNotifications
 import BerkananSDK
+#if os(watchOS)
+import WatchKit
+#else
+import UIKit
+#endif
 
 final class UserData: ObservableObject  {
+  
+  public static let shared: UserData = UserData()
   
   @Published(key: "firstRun")
   var firstRun: Bool = true
@@ -44,12 +51,14 @@ final class UserData: ObservableObject  {
   @Published(key: "composedText")
   var composedText = ""
   
+  @Published(key: "textInputSuggestion")
+  var textInputSuggestion = ""
+  
   @Published(key: "termsNotAccepted")
   var termsNotAccepted: Bool = true {
     didSet {
-      guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-      if !appDelegate.berkananBluetoothService.isStarted {
-        appDelegate.berkananBluetoothService.start()
+      if !ApplicationController.shared.berkananBluetoothService.isStarted {
+        ApplicationController.shared.berkananBluetoothService.start()
       }
     }
   }
@@ -67,7 +76,7 @@ final class UserData: ObservableObject  {
   var notificationsEnabled: Bool = false {
     didSet {
       if notificationsEnabled {
-        (UIApplication.shared.delegate as? AppDelegate)?.requestUserNotificationAuthorization(provisional: false)
+        ApplicationController.shared.requestUserNotificationAuthorization(provisional: false)
       }
     }
   }
@@ -84,8 +93,16 @@ final class UserData: ObservableObject  {
   @Published(key: "showFlaggedMessagesEnabled")
   var showFlaggedMessagesEnabled: Bool = true
   
+  static var defaultCurrentUserName: String {
+    #if os(watchOS)
+    return WKInterfaceDevice.current().name
+    #else
+    return UIDevice.current.name
+    #endif
+  }
+  
   @Published(key: "currentUserName")
-  var currentUserName: String = UIDevice.current.name {
+  var currentUserName: String = defaultCurrentUserName {
     didSet {
       User.current.name = currentUserName
       if currentUserName == "Anonymous" {
@@ -94,8 +111,16 @@ final class UserData: ObservableObject  {
     }
   }
   
+  static var defaultcurrentUserUUIDString: String {
+    #if os(watchOS)
+    return UUID().uuidString
+    #else
+    return UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+    #endif
+  }
+  
   @Published(key: "currentUserUUIDString")
-  var currentUserUUIDString: String = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString {
+  var currentUserUUIDString: String = defaultcurrentUserUUIDString {
     didSet {
       guard let uuid = UUID(uuidString: currentUserUUIDString) else { return }
       User.current.identifier = uuid.protobufValue()

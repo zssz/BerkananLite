@@ -1,11 +1,14 @@
 //
-//  Created by Zsombor Szabo on 06/10/2018.
-//  Copyright © 2018 IZE. All rights reserved.
+// Copyright © 2019 IZE Ltd. and the project authors
+// Licensed under MIT License
+//
+// See LICENSE.txt for license information.
 //
 
 import Foundation
 import StoreKit
 
+#if !os(tvOS)
 extension SKStoreReviewController {
   
   open class func requestReviewForCurrentVersionIfNeeded() {
@@ -23,4 +26,4 @@ extension SKStoreReviewController {
     }
   }
 }
-
+#endif
