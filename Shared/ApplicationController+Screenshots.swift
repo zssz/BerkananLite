@@ -11,8 +11,8 @@ import BerkananSDK
 extension ApplicationController {
   
   var isScreenshoting: Bool {
-    return true
-//    return ProcessInfo.processInfo.arguments.contains("-ui_testing")
+//    return true
+    return ProcessInfo.processInfo.arguments.contains("-ui_testing")
   }
   
   func prepareForScreenshots() {
