@@ -11,7 +11,9 @@ struct SettingsView: View {
   
   @EnvironmentObject var userData: UserData
   
-  private var form: some View {
+  @State var showsIDActionSheet = false
+  
+  var body: some View {
     Form {
       #if targetEnvironment(macCatalyst)
       Section {
@@ -32,8 +34,22 @@ struct SettingsView: View {
         HStack {
           Text("Name").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
           Divider()
-          TextField("Nameless", text: self.$userData.currentUserName).modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
+          TextField("Name", text: self.$userData.currentUserName).modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
         }
+        #if os(tvOS) || os(watchOS)
+        Button(action: { self.showsIDActionSheet.toggle() }) {
+          HStack {
+            Text("ID").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
+            Divider()
+            Text(verbatim: self.userData.currentUserUUIDString).modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
+          }
+        }.actionSheet(isPresented: self.$showsIDActionSheet) {
+          ActionSheet(title: Text("ID"), message: Text(verbatim: self.userData.currentUserUUIDString), buttons: [
+            .default(Text("Refresh"), action: { self.userData.currentUserUUIDString = UUID().uuidString}),
+            .cancel({ self.showsIDActionSheet = false })
+          ])
+        }
+        #else
         HStack {
           Text("ID").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize))
           Divider()
@@ -58,6 +74,7 @@ struct SettingsView: View {
           }
           #endif
         }
+        #endif
       }
       Section {
         #if !os(watchOS)
@@ -69,6 +86,7 @@ struct SettingsView: View {
       Section(header: Text("About").modifier(SystemFont(font: .caption, sizeOnMacCatalyst: self.$userData.captionFontSize)), footer: Text("Version \(Bundle.main.formattedVersion)").modifier(SystemFont(font: .footnote, sizeOnMacCatalyst: self.$userData.footnoteFontSize))) {
         NavigationLink(destination: TermsView()) { Text("Terms of Use").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)) }
         NavigationLink(destination: PrivacyView()) { Text("Privacy Policy").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)) }
+        #if !os(tvOS)
         Button(action: {
           guard let url = URL(string: "mailto:support@berkanan.chat") else { return }
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -77,24 +95,10 @@ struct SettingsView: View {
           guard let url = URL(string: "https://github.com/zssz/BerkananLite") else { return }
           UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }) { Text("View Source Code").modifier(SystemFont(font: .body, sizeOnMacCatalyst: self.$userData.bodyFontSize)) }
+        #endif
       }
       #endif
     }.navigationBarTitle(Text("Settings"))
-  }
-  
-  var body: some View {
-    #if os(watchOS)
-    return self.form.contextMenu {
-      Button(action: { withAnimation { self.userData.currentUserUUIDString = UUID().uuidString } }) {
-        VStack {
-          Image(systemName: "arrow.clockwise")
-          Text("Refresh ID")
-        }
-      }
-    }
-    #else
-    return self.form
-    #endif
   }
 }
 

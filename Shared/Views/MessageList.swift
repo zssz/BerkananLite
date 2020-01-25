@@ -17,6 +17,8 @@ struct MessageList : View {
   
   @ObservedObject var messageStore: MessageStore
   
+  @State var showsMessageActionSheet = false
+  
   var body: some View {
     List {
       #if os(watchOS)
@@ -34,6 +36,13 @@ struct MessageList : View {
           Text("New Message")
         }
       }
+      #elseif os(tvOS)
+      TextField("New Message", text: self.$userData.composedText) {
+        (UIApplication.shared.connectedScenes.first { $0.delegate is UIWindowSceneDelegate }?.delegate as? UIWindowSceneDelegate)?.window??.rootViewController?.presentedViewController?.dismiss(animated: true, completion: {
+          guard !self.userData.composedText.isEmpty else { return }
+          ApplicationController.shared.send(self.userData.composedText)
+        })
+      }
       #endif
       ForEach(self.messageStore.messages) { message in
         // Don't show messages from blocked users
@@ -46,7 +55,22 @@ struct MessageList : View {
               MessageRow(message: message).environmentObject(self.userData)
             }.listRowPlatterColor(.clear).listRowInsets(EdgeInsets())
             #elseif os(tvOS)
-            MessageRow(message: message).environmentObject(self.userData)
+            Button(action: { self.showsMessageActionSheet.toggle() }) {
+              MessageRow(message: message)
+            }.actionSheet(isPresented: self.$showsMessageActionSheet) {
+              var buttons = [ActionSheet.Button.default(Text("Repost"), action: { ApplicationController.shared.send(message.text) })]
+              if message.sourceUser.identifier != User.current.identifier {
+                if self.userData.isFlagged(message: message) {
+                  buttons.append(ActionSheet.Button.default(Text("Unflag"), action: { self.userData.unflag(message: message) }))
+                }
+                else {
+                  buttons.append(ActionSheet.Button.default(Text("Flag"), action: { self.userData.flag(message: message) }))
+                }
+                buttons.append(ActionSheet.Button.default(Text("Block"), action: { self.userData.block(user: message.sourceUser) }))
+              }
+              buttons.append(.cancel())
+              return ActionSheet(title: Text(verbatim: message.sourceUser.displayName), message: Text(verbatim: message.text), buttons: buttons)
+            }
             #else
             MessageRow(message: message).environmentObject(self.userData).contextMenu { MessageActions(message: message).environmentObject(self.userData) }
             #endif

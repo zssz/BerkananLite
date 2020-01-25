@@ -11,16 +11,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
   
   func applicationDidFinishLaunching() {
     // Perform any final initialization of your application.
-    if ApplicationController.shared.userData.firstRun {
-      ApplicationController.shared.userData.firstRun = false
-    }
-    else {
-      ApplicationController.shared.userData.termsNotAccepted = !ApplicationController.shared.userData.termsAcceptButtonTapped
-      ApplicationController.shared.berkananBluetoothService.start()
-    }
-    if ApplicationController.shared.isScreenshoting {
-      ApplicationController.shared.prepareForScreenshots()
-    }
+    let controller = ApplicationController.shared
+    if controller.isScreenshoting {
+      controller.prepareForScreenshots()
+    }    
   }
   
   func applicationDidBecomeActive() {

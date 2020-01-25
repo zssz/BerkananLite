@@ -13,17 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    if ApplicationController.shared.userData.firstRun {
-      ApplicationController.shared.userData.firstRun = false
+    let controller = ApplicationController.shared
+    if controller.isScreenshoting {
+      controller.prepareForScreenshots()
     }
-    else {
-      ApplicationController.shared.userData.termsNotAccepted = !ApplicationController.shared.userData.termsAcceptButtonTapped
-      ApplicationController.shared.berkananBluetoothService.start()
-    }
-    if ApplicationController.shared.isScreenshoting {
-      ApplicationController.shared.prepareForScreenshots()
-    }
-       
     return true
   }
   

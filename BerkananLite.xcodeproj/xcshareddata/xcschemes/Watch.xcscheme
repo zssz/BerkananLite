@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D99A73523D8427800D17CEA"
-               BuildableName = "Watch.app"
-               BlueprintName = "Watch"
+               BuildableName = "Berkanan Lite.app"
+               BlueprintName = "BerkananLiteWatchKitApp"
                ReferencedContainer = "container:BerkananLite.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -61,8 +61,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D99A73523D8427800D17CEA"
-            BuildableName = "Watch.app"
-            BlueprintName = "Watch"
+            BuildableName = "Berkanan Lite.app"
+            BlueprintName = "BerkananLiteWatchKitApp"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -80,8 +80,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D99A73523D8427800D17CEA"
-            BuildableName = "Watch.app"
-            BlueprintName = "Watch"
+            BuildableName = "Berkanan Lite.app"
+            BlueprintName = "BerkananLiteWatchKitApp"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
       </RemoteRunnable>
@@ -89,8 +89,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D99A73523D8427800D17CEA"
-            BuildableName = "Watch.app"
-            BlueprintName = "Watch"
+            BuildableName = "Berkanan Lite.app"
+            BlueprintName = "BerkananLiteWatchKitApp"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

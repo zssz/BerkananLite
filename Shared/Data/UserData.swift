@@ -18,8 +18,6 @@ import UIKit
 
 final class UserData: ObservableObject  {
   
-  public static let shared: UserData = UserData()
-  
   @Published(key: "firstRun")
   var firstRun: Bool = true
   
@@ -55,13 +53,7 @@ final class UserData: ObservableObject  {
   var textInputSuggestion = ""
   
   @Published(key: "termsNotAccepted")
-  var termsNotAccepted: Bool = true {
-    didSet {
-      if !ApplicationController.shared.berkananBluetoothService.isStarted {
-        ApplicationController.shared.berkananBluetoothService.start()
-      }
-    }
-  }
+  var termsNotAccepted: Bool = true
   
   @Published(key: "termsAcceptButtonTapped")
   var termsAcceptButtonTapped: Bool = false {
@@ -73,13 +65,7 @@ final class UserData: ObservableObject  {
   }
   
   @Published(key: "notificationsEnabled")
-  var notificationsEnabled: Bool = false {
-    didSet {
-      if notificationsEnabled {
-        ApplicationController.shared.requestUserNotificationAuthorization(provisional: false)
-      }
-    }
-  }
+  var notificationsEnabled: Bool = false
   
   @Published
   var notificationsAuthorizationStatus: UNAuthorizationStatus = .notDetermined {

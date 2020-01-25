@@ -15,29 +15,30 @@ import WatchKit
 struct MessageActions : View {
   
   @EnvironmentObject var userData: UserData
+  @Environment(\.presentationMode) var presentationMode
   
   var message: PublicMessage
   
   var body: some View {
-    VStack(alignment: .leading) {
+    VStack(alignment: .center) {
       Button(action: {
-        ApplicationController.shared.send(self.message.text)
         #if os(watchOS)
-        WKExtension.shared().visibleInterfaceController?.pop()
+        self.presentationMode.wrappedValue.dismiss()
         #endif
+        ApplicationController.shared.send(self.message.text)
       }) {
         HStack {
           Image(systemName: "paperplane")
-          Text("Resend")
+          Text("Repost")
         }
       }
       if message.sourceUser.identifier != User.current.identifier {
         if self.userData.isFlagged(message: message) {
           Button(action: {
-            self.userData.unflag(message: self.message)
             #if os(watchOS)
-            WKExtension.shared().visibleInterfaceController?.pop()
+            self.presentationMode.wrappedValue.dismiss()
             #endif
+            self.userData.unflag(message: self.message)
           }) {
             HStack {
               Image(systemName: "flag.slash")
@@ -47,10 +48,10 @@ struct MessageActions : View {
         }
         else {
           Button(action: {
-            self.userData.flag(message: self.message)
             #if os(watchOS)
-            WKExtension.shared().visibleInterfaceController?.pop()
+            self.presentationMode.wrappedValue.dismiss()
             #endif
+            self.userData.flag(message: self.message)
           }) {
             HStack {
               Image(systemName: "flag")
@@ -59,10 +60,10 @@ struct MessageActions : View {
           }
         }
         Button(action: {
-          self.userData.block(user: self.message.sourceUser)
           #if os(watchOS)
-          WKExtension.shared().visibleInterfaceController?.pop()
+          self.presentationMode.wrappedValue.dismiss()
           #endif
+          self.userData.block(user: self.message.sourceUser)
         }) {
           HStack {
             Image(systemName: "hand.raised")

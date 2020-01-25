@@ -61,7 +61,11 @@ struct ContentView : View {
   
   private var settingsView: some View {
     NavigationView {
+      #if os(tvOS)
+      SettingsView().environmentObject(self.userData)
+      #else
       SettingsView().environmentObject(self.userData).navigationBarItems(leading: Button(action: { self.userData.showsPreferences.toggle() }, label: { Image(systemName: "chevron.down").imageScale(.large) }))
+      #endif
     }.navigationViewStyle(StackNavigationViewStyle())
   }
   

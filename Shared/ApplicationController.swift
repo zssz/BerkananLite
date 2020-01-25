@@ -16,33 +16,49 @@ import StoreKit
 import UIKit
 #endif
 
-public class ApplicationController: NSObject {
+class ApplicationController: NSObject {
   
-  public static let shared: ApplicationController = ApplicationController()
+  static let shared = ApplicationController()
   
-  static let berkananLiteServiceConfigurationIdentifier = UUID(uuidString: "A59240D8-26DF-47C5-A3A7-CC2B5DEB8919")!
+  let berkananBluetoothService: BerkananBluetoothService
+  let messageStore: MessageStore
+  let userData: UserData
   
-  public var berkananBluetoothService = try! BerkananBluetoothService(configuration: Configuration(identifier: berkananLiteServiceConfigurationIdentifier))
-  
-  var messageStore = MessageStore()    
-  var userData = UserData()
-  
-  var numberOfSentMessages = 0
-  var receiveMessageCanceller: AnyCancellable?
-  var servicesInRangeCanceller: AnyCancellable?
+  var numberOfSentMessages: Int = 0
+  var receiveMessageCanceller: AnyCancellable? = nil
+  var numberOfServicesInRangeCanceller: AnyCancellable? = nil
+  var termsNotAcceptedCanceller: AnyCancellable? = nil
+  var notficationsEnabledCanceller: AnyCancellable? = nil
   
   override init() {
+    do {
+      self.berkananBluetoothService = try BerkananBluetoothService(configuration: Configuration(identifier: UUID(uuidString: "A59240D8-26DF-47C5-A3A7-CC2B5DEB8919")!))
+      self.messageStore = MessageStore()
+      self.userData = UserData()
+    }
+    catch {
+      fatalError("Initializing Berkanan Bluetooth Service failed: \(error.localizedDescription)")
+    }    
     super.init()
     
     User.current.name = self.userData.currentUserName
     User.current.identifier = UUID(uuidString: self.userData.currentUserUUIDString)?.protobufValue() ?? .random()
     
+    if self.userData.firstRun {
+      self.userData.firstRun = false
+    }
+    else {
+      self.userData.termsNotAccepted = !self.userData.termsAcceptButtonTapped
+      self.berkananBluetoothService.start()
+    }
+
     self.requestUserNotificationAuthorization(provisional: true)
-    
+
     self.receiveMessageCanceller = self.berkananBluetoothService.receiveMessageSubject
-      .sink { message in
+      .sink { [weak self] message in
+        guard let self = self else { return }
         switch message.payloadType {
-          
+
           case .publicMessage:
             guard let publicMessage = try? PublicMessage(serializedData: message.payload) else { return }
             DispatchQueue.main.async {
@@ -54,15 +70,16 @@ public class ApplicationController: NSObject {
               #endif
               self.postUserNotificationIfNeeded(for: publicMessage)
           }
-          
+
           default: ()
         }
     }
-    
-    self.servicesInRangeCanceller = self.berkananBluetoothService.publisher(for: \.servicesInRange)
+
+    self.numberOfServicesInRangeCanceller = self.berkananBluetoothService.numberOfServicesInRangeSubject
       .receive(on: RunLoop.main)
-      .sink(receiveValue: { (value) in
-        let number = value.count
+      .sink(receiveValue: { [weak self] (value) in
+        guard let self = self else { return }
+        let number = value
         if !self.isScreenshoting {
           self.userData.numberOfNearbyUsers = number
         }
@@ -70,7 +87,25 @@ public class ApplicationController: NSObject {
         #else
         UIApplication.shared.applicationIconBadgeNumber = number
         #endif
-      })    
+      })
+    
+    self.termsNotAcceptedCanceller = self.userData.$termsNotAccepted
+      .receive(on: RunLoop.main)
+      .sink { [weak self] (value) in
+        guard let self = self else { return }
+        if !value && !self.berkananBluetoothService.isStarted {
+          self.berkananBluetoothService.start()
+        }
+    }
+
+    self.notficationsEnabledCanceller = self.userData.$notificationsEnabled
+      .receive(on: RunLoop.main)
+      .sink { [weak self] (value) in
+        guard let self = self else { return }
+        if value {
+          self.requestUserNotificationAuthorization(provisional: false)
+        }
+    }
   }
   
   public func isMessageTooLong(for text: String) -> Bool {
