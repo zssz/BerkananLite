@@ -729,6 +729,7 @@
 			buildPhases = (
 				2DD66A3123D8D1060056A1E7 /* Sources */,
 				2DD66A3223D8D1060056A1E7 /* Frameworks */,
+				2D4C553123DD6F4400A03B6F /* Set Build Number */,
 				2DD66A3323D8D1060056A1E7 /* Resources */,
 			);
 			buildRules = (
@@ -882,6 +883,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2D4C553123DD6F4400A03B6F /* Set Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Set Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Set the build number to the count of Git commits\nbuildNumber=$(git rev-list --count HEAD)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n";
+		};
 		2DF7148523DC6F8700A43573 /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1582,7 +1601,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
@@ -1606,7 +1625,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.2.2;
+				MARKETING_VERSION = 2.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;

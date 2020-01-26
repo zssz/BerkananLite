@@ -83,10 +83,7 @@ class ApplicationController: NSObject {
         if !self.isScreenshoting {
           self.userData.numberOfNearbyUsers = number
         }
-        #if os(watchOS)
-        #else
-        UIApplication.shared.applicationIconBadgeNumber = number
-        #endif
+        self.configureApplicationIconBadgeNumberIfNeeded()
       })
     
     self.termsNotAcceptedCanceller = self.userData.$termsNotAccepted
@@ -105,7 +102,18 @@ class ApplicationController: NSObject {
         if value {
           self.requestUserNotificationAuthorization(provisional: false)
         }
+        self.configureApplicationIconBadgeNumberIfNeeded()
     }
+  }
+  
+  func configureApplicationIconBadgeNumberIfNeeded() {
+    var number = 0
+    if self.userData.notificationsEnabled {
+      number = self.userData.numberOfNearbyUsers
+    }
+    #if !os(watchOS)
+    UIApplication.shared.applicationIconBadgeNumber = number
+    #endif
   }
   
   public func isMessageTooLong(for text: String) -> Bool {
