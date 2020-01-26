@@ -11,6 +11,7 @@ class MenuController {
   
   init(with builder: UIMenuBuilder) {
     builder.remove(menu: .format)
+    builder.remove(menu: .help)
     builder.insertSibling(MenuController.preferencesMenu(), afterMenu: .about)
     builder.insertChild(MenuController.adjustTextSizeMenu(), atStartOfMenu: .view)
   }

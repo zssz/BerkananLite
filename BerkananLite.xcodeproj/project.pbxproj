@@ -646,10 +646,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D59167422BBCFD4007B169F /* Build configuration list for PBXNativeTarget "BerkananLite" */;
 			buildPhases = (
+				2DF7148523DC6F8700A43573 /* Set Build Number */,
 				2D59165422BBCFD0007B169F /* Sources */,
 				2D59165522BBCFD0007B169F /* Frameworks */,
 				2D59165622BBCFD0007B169F /* Resources */,
-				2DF7148523DC6F8700A43573 /* Set Build Number */,
 				2D09903823D87A550088E8BE /* Embed Watch Content */,
 			);
 			buildRules = (
@@ -917,7 +917,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Set the build number to the count of Git commits\nbuildNumber=$(git rev-list --count HEAD)\ninfoPlistPath=\"${TARGET_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}/Info.plist\"\nPLISTBUDDY=\"/usr/libexec/PlistBuddy\"\n$PLISTBUDDY -c \"Set :CFBundleVersion $buildNumber\" \"${infoPlistPath}\"\n\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Set the build number to the count of Git commits\nbuildNumber=$(git rev-list --count HEAD)\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n\n";
 		};
 		2DF7148623DC6F9F00A43573 /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
