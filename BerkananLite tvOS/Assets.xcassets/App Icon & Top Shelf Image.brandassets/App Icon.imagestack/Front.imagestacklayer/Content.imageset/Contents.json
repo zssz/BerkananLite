@@ -2,10 +2,12 @@
   "images" : [
     {
       "idiom" : "tv",
+      "filename" : "Template-Icon-App-Small-400x240_0000_Vector-Smart-Object.png",
       "scale" : "1x"
     },
     {
       "idiom" : "tv",
+      "filename" : "Template-Icon-App-Small-400x240-P3@2x_0000s_0000_Vector-Smart-Object.png",
       "scale" : "2x"
     }
   ],

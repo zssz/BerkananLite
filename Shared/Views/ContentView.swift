@@ -31,10 +31,10 @@ struct ContentView : View {
   private var messagesView: some View {
     ZStack(alignment: .bottom) {
       VStack {
+        #if os(tvOS)
+        MessageList(messageStore: self.messageStore).environmentObject(self.userData)
+        #else
         if !self.messageStore.messages.isEmpty {
-          #if os(tvOS)
-          MessageList(messageStore: self.messageStore).environmentObject(self.userData)
-          #else
           MessageList(messageStore: self.messageStore).environmentObject(self.userData)
             .introspectTableView { (tableView) in
               tableView.separatorStyle = .none
@@ -42,7 +42,6 @@ struct ContentView : View {
               tableView.verticalScrollIndicatorInsets.bottom = tableView.contentInset.bottom
               tableView.keyboardDismissMode = .interactive
           }
-          #endif
         }
         else {
           Spacer()
@@ -50,6 +49,7 @@ struct ContentView : View {
           Spacer()
           Spacer()
         }
+        #endif
       }
       #if targetEnvironment(macCatalyst)
       TextField("Message", text: self.$userData.composedText) {
@@ -74,6 +74,9 @@ struct ContentView : View {
       VStack(alignment: .center) {
         TermsView()
         Button(action: { self.userData.termsAcceptButtonTapped = true }) {
+          #if os(tvOS)
+          Text("Accept")
+          #else
           Text("Accept")
             .fontWeight(.semibold)
             .font(.system(size: .init(integerLiteral: 17)))
@@ -82,6 +85,7 @@ struct ContentView : View {
             .foregroundColor(.white)
             .background(Color.accentColor)
             .cornerRadius(15)
+          #endif
         }.padding()
       }
     }.navigationViewStyle(StackNavigationViewStyle())

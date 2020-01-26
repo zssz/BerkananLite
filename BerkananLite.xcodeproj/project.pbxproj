@@ -146,7 +146,6 @@
 		2DD66A6523D8D2B80056A1E7 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D616D8522BA0EAD00FBACB8 /* MessagesViewController.swift */; };
 		2DD66A6623D8D2CD0056A1E7 /* TermsOfUse.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DD91AD5233374DB009CFC03 /* TermsOfUse.txt */; };
 		2DD66A6723D8D2CF0056A1E7 /* PrivacyPolicy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2DE3ABEF233393D500B0BBB6 /* PrivacyPolicy.txt */; };
-		2DD66A6823D8E1AC0056A1E7 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8074D423C1BE0700D9439A /* BlurView.swift */; };
 		2DD91AD023335CF1009CFC03 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD91ACF23335CF1009CFC03 /* BlockedUsersView.swift */; };
 		2DD91AD123335CF1009CFC03 /* BlockedUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD91ACF23335CF1009CFC03 /* BlockedUsersView.swift */; };
 		2DD91AD323336470009CFC03 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD91AD223336470009CFC03 /* TermsView.swift */; };
@@ -288,7 +287,7 @@
 		2DA8771F22B3B3D90000BB25 /* MessageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRow.swift; sourceTree = "<group>"; };
 		2DB3472F23D31FD200779AFE /* ApplicationController+UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ApplicationController+UserNotifications.swift"; sourceTree = "<group>"; };
 		2DC3D520232944AF00A6D388 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
-		2DD66A3523D8D1060056A1E7 /* BerkananLitetvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BerkananLitetvOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DD66A3523D8D1060056A1E7 /* Berkanan Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Berkanan Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DD66A3B23D8D1080056A1E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2DD66A3E23D8D1080056A1E7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2DD66A4123D8D1080056A1E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -383,7 +382,7 @@
 				2D40B2E023C24D2900359B34 /* BerkananLiteUIScreenshots.xctest */,
 				2D99A73623D8427800D17CEA /* Berkanan Lite.app */,
 				2D99A74223D8427B00D17CEA /* BerkananLiteWatchKitExtension.appex */,
-				2DD66A3523D8D1060056A1E7 /* BerkananLitetvOS.app */,
+				2DD66A3523D8D1060056A1E7 /* Berkanan Lite.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -729,7 +728,6 @@
 			buildConfigurationList = 2DD66A4623D8D1080056A1E7 /* Build configuration list for PBXNativeTarget "BerkananLitetvOS" */;
 			buildPhases = (
 				2DD66A3123D8D1060056A1E7 /* Sources */,
-				2DD66A6E23D9891E0056A1E7 /* Set Build Number */,
 				2DD66A3223D8D1060056A1E7 /* Frameworks */,
 				2DD66A3323D8D1060056A1E7 /* Resources */,
 			);
@@ -742,7 +740,7 @@
 				2DD66A5F23D8D2500056A1E7 /* BerkananSDK */,
 			);
 			productName = TV;
-			productReference = 2DD66A3523D8D1060056A1E7 /* BerkananLitetvOS.app */;
+			productReference = 2DD66A3523D8D1060056A1E7 /* Berkanan Lite.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -884,24 +882,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2DD66A6E23D9891E0056A1E7 /* Set Build Number */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Set Build Number";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Set the build number to the count of Git commits\nbuildNumber=$(git rev-list --count HEAD)\ninfoPlistPath=\"${TARGET_BUILD_DIR}/${EXECUTABLE_FOLDER_PATH}/Info.plist\"\nPLISTBUDDY=\"/usr/libexec/PlistBuddy\"\n$PLISTBUDDY -c \"Set :CFBundleVersion $buildNumber\" \"${infoPlistPath}\"\n\n";
-		};
 		2DF7148523DC6F8700A43573 /* Set Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1112,7 +1092,6 @@
 				2DD66A6323D8D28F0056A1E7 /* UIWindow+TopViewController.swift in Sources */,
 				2DD66A4D23D8D2120056A1E7 /* ApplicationError+RecoverableError.swift in Sources */,
 				2DD66A5423D8D2230056A1E7 /* UNNotificationContent+Additions.swift in Sources */,
-				2DD66A6823D8E1AC0056A1E7 /* BlurView.swift in Sources */,
 				2DD66A5C23D8D2390056A1E7 /* BlockedUsersView.swift in Sources */,
 				2DD66A4B23D8D20E0056A1E7 /* ApplicationController+PresentError.swift in Sources */,
 				2DD66A6523D8D2B80056A1E7 /* MessagesViewController.swift in Sources */,
@@ -1594,6 +1573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"BerkananLite tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				ENABLE_PREVIEWS = YES;
@@ -1603,8 +1583,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.tvos;
-				PRODUCT_NAME = BerkananLitetvOS;
+				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
+				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1617,6 +1597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 32;
 				DEVELOPMENT_ASSET_PATHS = "\"BerkananLite tvOS/Preview Content\"";
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				ENABLE_PREVIEWS = YES;
@@ -1626,8 +1607,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.2.2;
-				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.tvos;
-				PRODUCT_NAME = BerkananLitetvOS;
+				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
+				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;

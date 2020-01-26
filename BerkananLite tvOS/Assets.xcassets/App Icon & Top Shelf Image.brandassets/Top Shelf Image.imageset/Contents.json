@@ -2,18 +2,22 @@
   "images" : [
     {
       "idiom" : "tv",
+      "filename" : "Template-TopShelf-1920x720.png",
       "scale" : "1x"
     },
     {
       "idiom" : "tv",
+      "filename" : "Template-TopShelf-1920x720-P3@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "tv-marketing",
+      "filename" : "Template-TopShelf-1920x720-1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "tv-marketing",
+      "filename" : "Template-TopShelf-1920x720-P3@2x-1.png",
       "scale" : "2x"
     }
   ],

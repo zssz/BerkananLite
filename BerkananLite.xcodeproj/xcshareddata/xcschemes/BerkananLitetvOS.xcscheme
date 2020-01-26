@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2DD66A3423D8D1060056A1E7"
-               BuildableName = "BerkananLiteTV.app"
+               BuildableName = "Berkanan Lite.app"
                BlueprintName = "BerkananLitetvOS"
                ReferencedContainer = "container:BerkananLite.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2DD66A3423D8D1060056A1E7"
-            BuildableName = "BerkananLiteTV.app"
+            BuildableName = "Berkanan Lite.app"
             BlueprintName = "BerkananLitetvOS"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2DD66A3423D8D1060056A1E7"
-            BuildableName = "BerkananLiteTV.app"
+            BuildableName = "Berkanan Lite.app"
             BlueprintName = "BerkananLitetvOS"
             ReferencedContainer = "container:BerkananLite.xcodeproj">
          </BuildableReference>
