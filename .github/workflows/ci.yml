@@ -15,4 +15,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Build
-      run: xcodebuild clean build -project BerkananLite.xcodeproj -scheme BerkananLite -destination "platform=macOS"
+      run: xcodebuild clean build -project BerkananLite.xcodeproj -scheme BerkananLite -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
