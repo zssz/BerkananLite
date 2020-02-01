@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:    
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: macOS-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Build macOS App
+      run: xcodebuild clean build -project BerkananLite.xcodeproj -scheme BerkananLite -destination "platform=macOS" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+    - name: Build watchOS App
+      run: xcodebuild clean build -project BerkananLite.xcodeproj -scheme BerkananLiteWatchKitApp -destination "platform=iOS Simulator,name=iPhone 11 Pro Max" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+    - name: Build tvOS App
+      run: xcodebuild clean build -project BerkananLite.xcodeproj -scheme BerkananLitetvOS -destination "platform=tvOS Simulator,name=Apple TV" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
