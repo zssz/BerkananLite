@@ -1,0 +1,5 @@
+language: swift
+osx_image: xcode11
+xcode_project: BerkananLite.xcodeproj
+xcode_scheme: BerkananLiteWatchKitApp
+xcode_destination: platform=watchOS Simulator,OS=6.1.1,name=Apple Watch Series 5 - 44mm
