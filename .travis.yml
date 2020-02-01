@@ -1,5 +1,0 @@
-language: swift
-osx_image: xcode11.3
-xcode_project: BerkananLite.xcodeproj
-xcode_scheme: BerkananLite
-xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11 Pro Max
