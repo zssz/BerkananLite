@@ -1,7 +1,7 @@
 ![App Icon](BerkananLite/Assets.xcassets/AppIcon.appiconset/128.png)
 # BerkananLite
 
-![CI](https://github.com/zssz/BerkananLite/workflows/CI/badge.svg)
+![build](https://github.com/zssz/BerkananLite/workflows/build/badge.svg)
 [![Contributions](https://img.shields.io/badge/contributions-welcome-blue)](CONTRIBUTING.md)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
 
