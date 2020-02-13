@@ -7,6 +7,7 @@
 
 import Foundation
 import BerkananSDK
+import SwiftUI
 
 extension ApplicationController {
   
@@ -15,7 +16,7 @@ extension ApplicationController {
     return ProcessInfo.processInfo.arguments.contains("-ui_testing")
   }
   
-  func prepareForScreenshots() {
+  func prepareForScreenshots(animated:Bool = false) {
     self.berkananBluetoothService.stop()
     self.userData.firstRun = false
     self.userData.termsAcceptButtonTapped = true
@@ -35,32 +36,55 @@ extension ApplicationController {
       $0.identifier = UUID(uuidString: "A393005A-9699-414E-8337-7BF32329195C")!.protobufValue()
       $0.name = NSLocalizedString("Michael", comment: "")
     }
-    self.messageStore.insert(message: PublicMessage.with({
-      $0.identifier = .random()
-      $0.sourceUser = john
-      $0.text = NSLocalizedString("Suggestions for a new TV series to watch? 🤔", comment: "Message used in app screenshots.")
-    }), at: 0)    
-//    for _ in 0...1000 {
-//      messageStore.insert(message: PublicMessage.with({
-//        $0.identifier = .random()
-//        $0.sourceUser = [john, kate, simone, michael].randomElement()!
-//        $0.text = String((0..<Int.random(in: 0..<140)).map{ _ in "abcdefghij klmnopqrst uvwxyzABCD EFGHIJKLMN OPQRSTUVW XYZ0123456789 🤓".randomElement()! })
-//      }), at: 0)
-//    }
-    self.messageStore.insert(message: PublicMessage.with({
-      $0.identifier = .random()
-      $0.sourceUser = kate
-      $0.text = "Game of Thrones"
-    }), at: 0)
-    self.messageStore.insert(message: PublicMessage.with({
-      $0.identifier = .random()
-      $0.sourceUser = michael
-      $0.text = "Rick and Morty 🤓"
-    }), at: 0)
-    self.messageStore.insert(message: PublicMessage.with({
-      $0.identifier = .random()
-      $0.sourceUser = simone
-      $0.text = "Stranger Things!"
-    }), at: 0)
+    //    for _ in 0...1000 {
+    //      messageStore.insert(message: PublicMessage.with({
+    //        $0.identifier = .random()
+    //        $0.sourceUser = [john, kate, simone, michael].randomElement()!
+    //        $0.text = String((0..<Int.random(in: 0..<140)).map{ _ in "abcdefghij klmnopqrst uvwxyzABCD EFGHIJKLMN OPQRSTUVW XYZ0123456789 🤓".randomElement()! })
+    //      }), at: 0)
+    //    }
+    let messages: [PublicMessage] = [
+      .with({
+        $0.identifier = .random()
+        $0.sourceUser = john
+        $0.text = NSLocalizedString("Suggestions for a new TV series to watch? 🤔", comment: "Message used in app screenshots.")
+      }),
+      .with({
+        $0.identifier = .random()
+        $0.sourceUser = kate
+        $0.text = "Stranger Things"
+      }),
+      .with({
+        $0.identifier = .random()
+        $0.sourceUser = michael
+        $0.text = "Rick and Morty 🤓"
+      }),
+      .with({
+        $0.identifier = .random()
+        $0.sourceUser = simone
+        $0.text = "The Mandalorian!"
+      }),
+    ]
+    if animated {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        withAnimation {
+          self.messageStore.insert(message: messages[0], at: 0)
+        }
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        withAnimation {
+          self.messageStore.insert(message: messages[1], at: 0)
+        }
+      }
+      DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        withAnimation {
+          self.messageStore.insert(message: messages[2], at: 0)
+          self.messageStore.insert(message: messages[3], at: 0)
+        }
+      }
+    }
+    else {
+      self.messageStore.messages = messages
+    }
   }
 }

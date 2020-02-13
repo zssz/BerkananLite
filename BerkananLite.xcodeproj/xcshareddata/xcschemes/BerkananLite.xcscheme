@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1100"
-   version = "1.3">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -60,6 +60,24 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "# Type a script or drag a script file from your workspace to insert its path.&#10;# Don&#x2019;t run on iOS devices.&#10;if [[ &quot;${SDKROOT}&quot; != *&quot;simulator&quot;* ]]; then&#10;    exit 0&#10;fi&#10;&#10;xcrun simctl boot &quot;${TARGET_DEVICE_IDENTIFIER}&quot;&#10;&#10;xcrun simctl status_bar &quot;${TARGET_DEVICE_IDENTIFIER}&quot; override \&#10;    --time &quot;2020-02-01T09:41:00+02:00&quot; \&#10;    --dataNetwork wifi \&#10;    --wifiMode active \&#10;    --wifiBars 3 \&#10;    --cellularMode active \&#10;    --cellularBars 4 \&#10;    --batteryState discharging \&#10;    --batteryLevel 100&#10;">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "2D59165722BBCFD0007B169F"
+                     BuildableName = "Berkanan Lite.app"
+                     BlueprintName = "BerkananLite"
+                     ReferencedContainer = "container:BerkananLite.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

@@ -371,6 +371,7 @@
 				2D0524E822AE77B300518A7A /* Products */,
 				2D0524FF22AE7A6400518A7A /* Frameworks */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
 		};
 		2D0524E822AE77B300518A7A /* Products */ = {
@@ -1349,7 +1350,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -1374,7 +1375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -1402,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1433,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1490,7 +1491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"BerkananLite WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				ENABLE_PREVIEWS = YES;
@@ -1500,7 +1501,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = BerkananLiteWatchKitExtension;
 				SDKROOT = watchos;
@@ -1516,7 +1517,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 70;
 				DEVELOPMENT_ASSET_PATHS = "\"BerkananLite WatchKit Extension/Preview Content\"";
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				ENABLE_PREVIEWS = YES;
@@ -1526,7 +1527,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = BerkananLiteWatchKitExtension;
 				SDKROOT = watchos;
@@ -1545,12 +1546,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 70;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				IBSC_MODULE = BerkananLiteWatchKitExtension;
 				INFOPLIST_FILE = "BerkananLite WatchKit App/Info.plist";
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = watchos;
@@ -1570,12 +1571,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 45;
+				CURRENT_PROJECT_VERSION = 70;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = NO;
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				IBSC_MODULE = BerkananLiteWatchKitExtension;
 				INFOPLIST_FILE = "BerkananLite WatchKit App/Info.plist";
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = watchos;
@@ -1601,7 +1602,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
@@ -1625,7 +1626,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
