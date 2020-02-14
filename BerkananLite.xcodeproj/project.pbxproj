@@ -1350,7 +1350,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -1375,7 +1375,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.SomeApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -1403,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1434,7 +1434,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1501,7 +1501,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = BerkananLiteWatchKitExtension;
 				SDKROOT = watchos;
@@ -1527,7 +1527,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp.watchkitextension;
 				PRODUCT_NAME = BerkananLiteWatchKitExtension;
 				SDKROOT = watchos;
@@ -1551,7 +1551,7 @@
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				IBSC_MODULE = BerkananLiteWatchKitExtension;
 				INFOPLIST_FILE = "BerkananLite WatchKit App/Info.plist";
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = watchos;
@@ -1576,7 +1576,7 @@
 				DEVELOPMENT_TEAM = S647QX78WZ;
 				IBSC_MODULE = BerkananLiteWatchKitExtension;
 				INFOPLIST_FILE = "BerkananLite WatchKit App/Info.plist";
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite.watchkitapp;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = watchos;
@@ -1602,7 +1602,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
@@ -1626,7 +1626,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.3;
+				MARKETING_VERSION = 2.3.4;
 				PRODUCT_BUNDLE_IDENTIFIER = company.ize.BerkananLite;
 				PRODUCT_NAME = "Berkanan Lite";
 				SDKROOT = appletvos;
@@ -1727,7 +1727,7 @@
 			repositoryURL = "https://github.com/zssz/BerkananSDK.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.7;
+				minimumVersion = 2.2.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
